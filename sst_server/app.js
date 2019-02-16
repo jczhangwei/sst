@@ -1,10 +1,10 @@
-var WebSocketServer = require('ws').Server;
-var webSocketServer = new WebSocketServer({port: 8080});
-var HashMap = require('hashmap');
+let WebSocketServer = require('ws').Server;
+let webSocketServer = new WebSocketServer({port: 8080});
+let HashMap = require('hashmap');
 
 // record the client
-var userConnectionMap = new HashMap();
-var connectNum = 0;
+let userConnectionMap = new HashMap();
+let connectNum = 0;
 
 // connection
 webSocketServer.on('connection', function(client) {
@@ -17,7 +17,6 @@ webSocketServer.on('connection', function(client) {
     });
 
     client.on('close', function(message) {
-        var objMessage = JSON.parse(message);
-        userConnectionMap.remove(objMessage['from']);
+
     });
 });
