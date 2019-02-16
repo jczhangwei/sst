@@ -1,10 +1,10 @@
-var WebSocket = require('ws');
+let WebSocket = require('ws');
 
-var ws = new WebSocket("ws://localhost:8080");
+let ws = new WebSocket("ws://localhost:8080");
 
 ws.onopen = function(e) {
     console.log('Connection to server opened');
-    var runner = (function* () {
+    let runner = (function* () {
         while(true) {
             yield setTimeout(function() {
                runner.next();
@@ -14,9 +14,11 @@ ws.onopen = function(e) {
     })();
     runner.next();
 };
+
 ws.onmessage = function(event) {
     console.log('\nClient received a message', event.data);
 };
+
 ws.onclose = function(e) {
     console.log('connection closed.');
 };
