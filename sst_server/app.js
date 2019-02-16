@@ -11,6 +11,8 @@ webSocketServer.on('connection', function(client) {
     ++connectNum;
     console.log('A client has connected. current connect num is : ' + connectNum);
 
+    
+
     client.on('message', function(message) {
         console.log("Receive message: ", message);
         client.send("Receive your message.");

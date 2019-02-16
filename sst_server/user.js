@@ -9,10 +9,14 @@ class User {
         this._client = value;
     }
 
-    constructor() {
-
+    constructor(client) {
+        this.client = client;
     }
 
 }
 
-module.exports = User;
+function user(client){
+    return new User(client);
+}
+
+module.exports = user;
