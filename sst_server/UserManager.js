@@ -11,12 +11,30 @@ class UserManager {
 
     constructor() {
         this._clients = new Map();
+        this._users = new Map();
 
     }
 
-    user_connect(client, suid) {
+    get users() {
+        return this._users;
+    }
+
+    set users(value) {
+        this._users = value;
+    }
+
+    userConnect(client, suid) {
         let user = new User(suid);
         this.clients.set(user, client);
+        this.users.set(client, user);
+    }
+
+    userDisconnect(client) {
+
+    }
+
+    isLogin(client) {
+        return this.users.has(client);
     }
 
 }
