@@ -17,8 +17,12 @@ let MsgType = {
 let user_manager = new UserManager();
 let connects = [];
 
-function removeClient(client) {
+function removeClient(key) {
+    key = parseInt(key);
+    let connect = connects[key];
+    connect.client.close();
 
+    connects.splice(key, 1);
 }
 
 // connection
@@ -36,7 +40,7 @@ webSocketServer.on('connection', function(client) {
             message = JSON.parse(message);
 
         } catch(e) {
-            client
+
         }
 
         switch(message.type) {
@@ -58,7 +62,7 @@ schedule.scheduleJob("0-59 * * * * *", function() {
         let connect = connects[key];
         console.log("scheduleJob.check_login", connect.timestamp, Date.now());
         if(!user_manager.isLogin(connect.client) && Date.now() - connect.timestamp >= out_time) {
-            connect.client.close();
+            removeClient(key);
         }
     }
 });
