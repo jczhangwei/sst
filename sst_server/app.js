@@ -1,9 +1,12 @@
 let WebSocketServer = require('ws').Server;
 let schedule = require('node-schedule');
-
-let UserManager = require("./UserManager");
-let webSocketServer = new WebSocketServer({port: 8080});
+let protobuf = require("protobufjs");
 let HashMap = require('hashmap');
+
+let ProtoManager = require("./ProtoManager");
+let UserManager = require("./UserManager");
+
+let webSocketServer = new WebSocketServer({port: 8080});
 
 let connectNum = 0;
 
@@ -24,6 +27,8 @@ function removeClient(key) {
 
     connects.splice(key, 1);
 }
+
+var proto_namager = new ProtoManager();
 
 // connection
 webSocketServer.on('connection', function(client) {

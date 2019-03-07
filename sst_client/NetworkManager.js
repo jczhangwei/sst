@@ -39,9 +39,9 @@ class NetworkManager {
                         break;
                     }
                 }
-            })();
+            }.bind(this))();
             runner.next();
-        };
+        }.bind(this);
 
         ws.onmessage = function(event) {
             console.log('\nClient received a message', event.data);
