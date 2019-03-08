@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./app.js",
-    "build_proto": "./node_modules/.bin/pbjs "
+    "build_proto": "pbts -t static -p proto -o ProtoClasses.js --es6 --keep-case main.proto"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",

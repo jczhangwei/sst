@@ -1,0 +1,8 @@
+syntax = "proto3";
+package sst;
+
+message ArrayDiff {
+    int32 origin_start = 1;
+    int32 origin_end = 2;
+    int32 result_start = 3;
+}
