@@ -1,2 +1,2 @@
 # sst
-an auto sync game server
+An auto sync game server
