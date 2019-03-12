@@ -2,6 +2,13 @@ let protobuf = require("protobufjs");
 protobuf.parse.defaults.keepCase = true;
 
 class ProtoManager {
+    static get instance() {
+        if(!this._instance) {
+            this._instance = new ProtoManager();
+        }
+        return this._instance;
+    }
+
     constructor() {
         this.init();
     }

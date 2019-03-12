@@ -28,7 +28,7 @@ function removeClient(key) {
     connects.splice(key, 1);
 }
 
-var proto_namager = new ProtoManager();
+var proto_namager = ProtoManager.instance;
 
 // connection
 webSocketServer.on('connection', function(client) {
