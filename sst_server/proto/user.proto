@@ -1,10 +1,10 @@
 syntax = "proto3";
 package sst;
 
-import "user.proto";
-import "sst.proto";
+import "resource.proto";
 
-message Login {
+message User {
     string user_name = 1;
     string pass_word = 2;
+    repeated Resource resources = 3;
 }
