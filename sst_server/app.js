@@ -17,7 +17,8 @@ let MsgType = {
     business: "business"
 };
 
-let user_manager = new UserManager();
+let user_manager = UserManager.instance;
+var proto_namager = ProtoManager.instance;
 let connects = [];
 
 function removeClient(key) {
@@ -28,7 +29,6 @@ function removeClient(key) {
     connects.splice(key, 1);
 }
 
-var proto_namager = ProtoManager.instance;
 
 // connection
 webSocketServer.on('connection', function(client) {

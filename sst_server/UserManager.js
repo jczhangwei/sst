@@ -1,6 +1,13 @@
 let User = require("./User");
 
 class UserManager {
+    static get instance() {
+        if(!this._instance) {
+            this._instance = new UserManager();
+        }
+        return this._instance;
+    }
+
     get clients() {
         return this._clients;
     }
@@ -12,7 +19,6 @@ class UserManager {
     constructor() {
         this._clients = new Map();
         this._users = new Map();
-
     }
 
     get users() {

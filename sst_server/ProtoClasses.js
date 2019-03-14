@@ -999,5 +999,215 @@ export const sst = $root.sst = (() => {
         return ArrayDiff;
     })();
 
+    sst.BaseDiff = (function() {
+
+        /**
+         * Properties of a BaseDiff.
+         * @memberof sst
+         * @interface IBaseDiff
+         * @property {string|null} [path] BaseDiff path
+         * @property {number|null} [value] BaseDiff value
+         */
+
+        /**
+         * Constructs a new BaseDiff.
+         * @memberof sst
+         * @classdesc Represents a BaseDiff.
+         * @implements IBaseDiff
+         * @constructor
+         * @param {sst.IBaseDiff=} [properties] Properties to set
+         */
+        function BaseDiff(properties) {
+            if (properties)
+                for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * BaseDiff path.
+         * @member {string} path
+         * @memberof sst.BaseDiff
+         * @instance
+         */
+        BaseDiff.prototype.path = "";
+
+        /**
+         * BaseDiff value.
+         * @member {number} value
+         * @memberof sst.BaseDiff
+         * @instance
+         */
+        BaseDiff.prototype.value = 0;
+
+        /**
+         * Creates a new BaseDiff instance using the specified properties.
+         * @function create
+         * @memberof sst.BaseDiff
+         * @static
+         * @param {sst.IBaseDiff=} [properties] Properties to set
+         * @returns {sst.BaseDiff} BaseDiff instance
+         */
+        BaseDiff.create = function create(properties) {
+            return new BaseDiff(properties);
+        };
+
+        /**
+         * Encodes the specified BaseDiff message. Does not implicitly {@link sst.BaseDiff.verify|verify} messages.
+         * @function encode
+         * @memberof sst.BaseDiff
+         * @static
+         * @param {sst.IBaseDiff} message BaseDiff message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BaseDiff.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.path != null && message.hasOwnProperty("path"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.path);
+            if (message.value != null && message.hasOwnProperty("value"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.value);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified BaseDiff message, length delimited. Does not implicitly {@link sst.BaseDiff.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof sst.BaseDiff
+         * @static
+         * @param {sst.IBaseDiff} message BaseDiff message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BaseDiff.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a BaseDiff message from the specified reader or buffer.
+         * @function decode
+         * @memberof sst.BaseDiff
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {sst.BaseDiff} BaseDiff
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BaseDiff.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.sst.BaseDiff();
+            while (reader.pos < end) {
+                let tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.path = reader.string();
+                    break;
+                case 2:
+                    message.value = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a BaseDiff message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof sst.BaseDiff
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {sst.BaseDiff} BaseDiff
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BaseDiff.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a BaseDiff message.
+         * @function verify
+         * @memberof sst.BaseDiff
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        BaseDiff.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.path != null && message.hasOwnProperty("path"))
+                if (!$util.isString(message.path))
+                    return "path: string expected";
+            if (message.value != null && message.hasOwnProperty("value"))
+                if (!$util.isInteger(message.value))
+                    return "value: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a BaseDiff message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof sst.BaseDiff
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {sst.BaseDiff} BaseDiff
+         */
+        BaseDiff.fromObject = function fromObject(object) {
+            if (object instanceof $root.sst.BaseDiff)
+                return object;
+            let message = new $root.sst.BaseDiff();
+            if (object.path != null)
+                message.path = String(object.path);
+            if (object.value != null)
+                message.value = object.value | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a BaseDiff message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof sst.BaseDiff
+         * @static
+         * @param {sst.BaseDiff} message BaseDiff
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        BaseDiff.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            let object = {};
+            if (options.defaults) {
+                object.path = "";
+                object.value = 0;
+            }
+            if (message.path != null && message.hasOwnProperty("path"))
+                object.path = message.path;
+            if (message.value != null && message.hasOwnProperty("value"))
+                object.value = message.value;
+            return object;
+        };
+
+        /**
+         * Converts this BaseDiff to JSON.
+         * @function toJSON
+         * @memberof sst.BaseDiff
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        BaseDiff.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return BaseDiff;
+    })();
+
     return sst;
 })();

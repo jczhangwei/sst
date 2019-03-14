@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./app.js",
+    "test" : "node %NODE_DEBUG_OPTION% ./test.js",
     "build_proto": "pbjs -t static -p proto -o ProtoClasses.js --es6 --keep-case main.proto"
   },
   "dependencies": {

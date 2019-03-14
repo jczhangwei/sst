@@ -6,3 +6,8 @@ message ArrayDiff {
     int32 origin_end = 2;
     int32 result_start = 3;
 }
+
+message BaseDiff {
+    string path = 1;
+    int32 value = 2;
+}
