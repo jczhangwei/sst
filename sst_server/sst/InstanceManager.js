@@ -1,8 +1,8 @@
-class InstanceManager {
+class BoundleManager {
 
     static get instance() {
         if(!this._instance) {
-            this._instance = new InstanceManager();
+            this._instance = new BoundleManager();
         }
         return this._instance;
     }
@@ -18,4 +18,4 @@ class InstanceManager {
 
 }
 
-module.exports = InstanceManager;
+module.exports = BoundleManager;

@@ -1,3 +1,6 @@
+
+let data_bundle_name = "test_data_bundle"
+
 class SubscribeTest {
     static get instance() {
         if(!this._instance) {
@@ -11,7 +14,11 @@ class SubscribeTest {
     }
 
     run() {
-        
+
+    }
+
+    initData () {
+        this.data_boundle
     }
 }
 
