@@ -3,7 +3,10 @@ package sst;
 
 import "resource.proto";
 
-message User {
+/**
+*   base info of an user
+**/
+message UserBaseInfo {
     string user_name = 1;
     string pass_word = 2;
     repeated Resource resources = 3;
