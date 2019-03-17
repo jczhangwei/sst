@@ -1,4 +1,4 @@
-let BounderManager = require("../sst/BundleManager");
+let BounderManager = require("../sst/DataBundleManager");
 let sst = require("../ProtoClasses");
 
 
@@ -26,6 +26,7 @@ class SubscribeTest {
         BundleManager.instance.addDataBundle(bundle_name, user_base_info);
 
         user_base_info.pass_word = "1234123"
+
 
 
     }
