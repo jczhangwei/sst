@@ -7,7 +7,7 @@ message ArrayDiff {
     int32 result_start = 3;
 }
 
-message BaseDiff {
+message BaseAssignment {
     string path = 1;
     int32 value = 2;
 }
