@@ -1,4 +1,8 @@
 class DataBundle {
+    get proxies() {
+        return this._proxies;
+    }
+
     get proxy() {
         return this._proxy;
     }
@@ -27,6 +31,7 @@ class DataBundle {
     constructor() {
         this._data = null;
         this._proxy = null;
+        this._proxies = new Map();
         this._name = null;
     }
 
@@ -41,16 +46,12 @@ class DataBundle {
             return;
         }
 
-        let proxy = this.getProxyForObject(data_obj, "");
-        this.proxy = proxy;
-
+        let path = ".";
+        this.addProxyForObject(data_obj, path);
     }
 
     // todo 处理 Map 和 Array
-    getProxyForObject(data_obj, data_path, parent) {
-        let handler = this.getObjectHandler(data_obj, data_path);
-        let proxy = new Proxy(data_obj, handler);
-
+    addProxyForObject(data_obj, data_path, parent) {
         for(let key in data_obj) {
             if(data_obj.hasOwnProperty(key)) {
                 let pro = data_obj[key];
@@ -59,42 +60,41 @@ class DataBundle {
                 }
 
                 if(typeof pro === "object") {
-                    let p = this.getProxyForObject(data_obj, `${data_path}/${key}`);
-
+                    let path = `${data_path}/${key}`;
+                    let p = this.addProxyForObject(data_obj, path);
+                    this.proxies.add(path, p);
                 }
 
             }
 
         }
 
-        return proxy;
-
+        let handler = this.getObjectHandler(data_obj, data_path);
+        let proxy = new Proxy(data_obj, handler);
+        this.proxies.add(data_path, proxy);
     }
 
     getObjectHandler(data_obj, data_path) {
+        let self = this;
         return {
-            set: function(target, propKey, receiver) {
+            set: function(target, propKey, value, receiver) {
+                let res = Reflect.get(target, propKey);
+                let prop_path = data_path + propKey;
+                if(typeof res === "object") {
+                    self.proxies.del(prop_path);
+                }
+                Reflect.set(target, propKey, value);
+                self.addBaseAssignment(prop_path, value);
+            },
 
+            get: function(target, propKey, receiver) {
+                let res = Reflect.get(target, propKey);
+                if(typeof res === "object") {
+                    return self.proxies.get(data_path + propKey);
+                }
+                return res;
             }
         }
-    }
-
-    reprocessBaseData(obj, property_name, data_path) {
-        let value = obj[property_name];
-
-        let self = this;
-        Object.defineProperty(obj, property_name, {
-            enumerable: true,
-            configurable: false,
-            get: function() {
-                return value;
-            },
-            set: function(v) {
-                value = v;
-                self.addBaseAssignment(data_path, value);
-            },
-        });
-
     }
 
     /**
