@@ -1,6 +1,12 @@
 syntax = "proto3";
 package sst;
 
+import "google/protobuf/any.proto";
+
+message ErrorStatus {
+    string message = 1;
+}
+
 message ArrayDiff {
     int32 origin_start = 1;
     int32 origin_end = 2;
@@ -9,5 +15,5 @@ message ArrayDiff {
 
 message BaseAssignment {
     string path = 1;
-    int32 value = 2;
+    google.protobuf.Any data = 2;
 }

@@ -8,3 +8,6 @@ message Login {
     string user_name = 1;
     string pass_word = 2;
 }
+message Test {
+
+}

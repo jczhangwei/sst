@@ -1,10 +1,12 @@
+let root_proxy_name = ".";
+
 class DataBundle {
     get proxies() {
         return this._proxies;
     }
 
     get proxy() {
-        return this._proxy;
+        return this._proxies.get(root_proxy_name);
     }
 
     get name() {
@@ -30,9 +32,9 @@ class DataBundle {
 
     constructor() {
         this._data = null;
-        this._proxy = null;
         this._proxies = new Map();
         this._name = null;
+        this._modification = new Set();
     }
 
     /**
@@ -46,8 +48,7 @@ class DataBundle {
             return;
         }
 
-        let path = ".";
-        this.addProxyForObject(data_obj, path);
+        this.addProxyForObject(data_obj, root_proxy_name);
     }
 
     // todo 处理 Map 和 Array
@@ -106,16 +107,28 @@ class DataBundle {
 
     }
 
-    addObjectAssignment(path, value) {
-
-    }
-
     getModification() {
-
+        return this._modification;
     }
 
     clearModification() {
+        this._modification = new Set();
+    }
 
+    pushModification(modification) {
+        for(let mod in modification) {
+            if(mod instanceof sst.BaseAssignment) {
+                this.assignDataByPath(mod.path, mod.data);
+            }
+        }
+    }
+
+    assignDataByPath(path, data) {
+        path = path.split(path, "/");
+        let prop_name = path.pop();
+        for(let p in path) {
+
+        }
     }
 
 }

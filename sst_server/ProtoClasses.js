@@ -235,6 +235,166 @@
             return Login;
         })();
     
+        sst.Test = (function() {
+    
+            /**
+             * Properties of a Test.
+             * @memberof sst
+             * @interface ITest
+             */
+    
+            /**
+             * Constructs a new Test.
+             * @memberof sst
+             * @classdesc Represents a Test.
+             * @implements ITest
+             * @constructor
+             * @param {sst.ITest=} [properties] Properties to set
+             */
+            function Test(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * Creates a new Test instance using the specified properties.
+             * @function create
+             * @memberof sst.Test
+             * @static
+             * @param {sst.ITest=} [properties] Properties to set
+             * @returns {sst.Test} Test instance
+             */
+            Test.create = function create(properties) {
+                return new Test(properties);
+            };
+    
+            /**
+             * Encodes the specified Test message. Does not implicitly {@link sst.Test.verify|verify} messages.
+             * @function encode
+             * @memberof sst.Test
+             * @static
+             * @param {sst.ITest} message Test message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Test.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified Test message, length delimited. Does not implicitly {@link sst.Test.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof sst.Test
+             * @static
+             * @param {sst.ITest} message Test message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Test.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a Test message from the specified reader or buffer.
+             * @function decode
+             * @memberof sst.Test
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {sst.Test} Test
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Test.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.sst.Test();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a Test message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof sst.Test
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {sst.Test} Test
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Test.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a Test message.
+             * @function verify
+             * @memberof sst.Test
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Test.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                return null;
+            };
+    
+            /**
+             * Creates a Test message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof sst.Test
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {sst.Test} Test
+             */
+            Test.fromObject = function fromObject(object) {
+                if (object instanceof $root.sst.Test)
+                    return object;
+                return new $root.sst.Test();
+            };
+    
+            /**
+             * Creates a plain object from a Test message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof sst.Test
+             * @static
+             * @param {sst.Test} message Test
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Test.toObject = function toObject() {
+                return {};
+            };
+    
+            /**
+             * Converts this Test to JSON.
+             * @function toJSON
+             * @memberof sst.Test
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Test.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return Test;
+        })();
+    
         sst.UserBaseInfo = (function() {
     
             /**
@@ -779,6 +939,193 @@
             return Resource;
         })();
     
+        sst.ErrorStatus = (function() {
+    
+            /**
+             * Properties of an ErrorStatus.
+             * @memberof sst
+             * @interface IErrorStatus
+             * @property {string|null} [message] ErrorStatus message
+             */
+    
+            /**
+             * Constructs a new ErrorStatus.
+             * @memberof sst
+             * @classdesc Represents an ErrorStatus.
+             * @implements IErrorStatus
+             * @constructor
+             * @param {sst.IErrorStatus=} [properties] Properties to set
+             */
+            function ErrorStatus(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * ErrorStatus message.
+             * @member {string} message
+             * @memberof sst.ErrorStatus
+             * @instance
+             */
+            ErrorStatus.prototype.message = "";
+    
+            /**
+             * Creates a new ErrorStatus instance using the specified properties.
+             * @function create
+             * @memberof sst.ErrorStatus
+             * @static
+             * @param {sst.IErrorStatus=} [properties] Properties to set
+             * @returns {sst.ErrorStatus} ErrorStatus instance
+             */
+            ErrorStatus.create = function create(properties) {
+                return new ErrorStatus(properties);
+            };
+    
+            /**
+             * Encodes the specified ErrorStatus message. Does not implicitly {@link sst.ErrorStatus.verify|verify} messages.
+             * @function encode
+             * @memberof sst.ErrorStatus
+             * @static
+             * @param {sst.IErrorStatus} message ErrorStatus message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ErrorStatus.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.message != null && message.hasOwnProperty("message"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.message);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified ErrorStatus message, length delimited. Does not implicitly {@link sst.ErrorStatus.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof sst.ErrorStatus
+             * @static
+             * @param {sst.IErrorStatus} message ErrorStatus message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ErrorStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes an ErrorStatus message from the specified reader or buffer.
+             * @function decode
+             * @memberof sst.ErrorStatus
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {sst.ErrorStatus} ErrorStatus
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ErrorStatus.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.sst.ErrorStatus();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.message = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes an ErrorStatus message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof sst.ErrorStatus
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {sst.ErrorStatus} ErrorStatus
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ErrorStatus.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies an ErrorStatus message.
+             * @function verify
+             * @memberof sst.ErrorStatus
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ErrorStatus.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.message != null && message.hasOwnProperty("message"))
+                    if (!$util.isString(message.message))
+                        return "message: string expected";
+                return null;
+            };
+    
+            /**
+             * Creates an ErrorStatus message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof sst.ErrorStatus
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {sst.ErrorStatus} ErrorStatus
+             */
+            ErrorStatus.fromObject = function fromObject(object) {
+                if (object instanceof $root.sst.ErrorStatus)
+                    return object;
+                var message = new $root.sst.ErrorStatus();
+                if (object.message != null)
+                    message.message = String(object.message);
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from an ErrorStatus message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof sst.ErrorStatus
+             * @static
+             * @param {sst.ErrorStatus} message ErrorStatus
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ErrorStatus.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults)
+                    object.message = "";
+                if (message.message != null && message.hasOwnProperty("message"))
+                    object.message = message.message;
+                return object;
+            };
+    
+            /**
+             * Converts this ErrorStatus to JSON.
+             * @function toJSON
+             * @memberof sst.ErrorStatus
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ErrorStatus.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return ErrorStatus;
+        })();
+    
         sst.ArrayDiff = (function() {
     
             /**
@@ -1011,25 +1358,25 @@
             return ArrayDiff;
         })();
     
-        sst.BaseDiff = (function() {
+        sst.BaseAssignment = (function() {
     
             /**
-             * Properties of a BaseDiff.
+             * Properties of a BaseAssignment.
              * @memberof sst
-             * @interface IBaseDiff
-             * @property {string|null} [path] BaseDiff path
-             * @property {number|null} [value] BaseDiff value
+             * @interface IBaseAssignment
+             * @property {string|null} [path] BaseAssignment path
+             * @property {google.protobuf.IAny|null} [data] BaseAssignment data
              */
     
             /**
-             * Constructs a new BaseDiff.
+             * Constructs a new BaseAssignment.
              * @memberof sst
-             * @classdesc Represents a BaseDiff.
-             * @implements IBaseDiff
+             * @classdesc Represents a BaseAssignment.
+             * @implements IBaseAssignment
              * @constructor
-             * @param {sst.IBaseDiff=} [properties] Properties to set
+             * @param {sst.IBaseAssignment=} [properties] Properties to set
              */
-            function BaseDiff(properties) {
+            function BaseAssignment(properties) {
                 if (properties)
                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                         if (properties[keys[i]] != null)
@@ -1037,80 +1384,80 @@
             }
     
             /**
-             * BaseDiff path.
+             * BaseAssignment path.
              * @member {string} path
-             * @memberof sst.BaseDiff
+             * @memberof sst.BaseAssignment
              * @instance
              */
-            BaseDiff.prototype.path = "";
+            BaseAssignment.prototype.path = "";
     
             /**
-             * BaseDiff value.
-             * @member {number} value
-             * @memberof sst.BaseDiff
+             * BaseAssignment data.
+             * @member {google.protobuf.IAny|null|undefined} data
+             * @memberof sst.BaseAssignment
              * @instance
              */
-            BaseDiff.prototype.value = 0;
+            BaseAssignment.prototype.data = null;
     
             /**
-             * Creates a new BaseDiff instance using the specified properties.
+             * Creates a new BaseAssignment instance using the specified properties.
              * @function create
-             * @memberof sst.BaseDiff
+             * @memberof sst.BaseAssignment
              * @static
-             * @param {sst.IBaseDiff=} [properties] Properties to set
-             * @returns {sst.BaseDiff} BaseDiff instance
+             * @param {sst.IBaseAssignment=} [properties] Properties to set
+             * @returns {sst.BaseAssignment} BaseAssignment instance
              */
-            BaseDiff.create = function create(properties) {
-                return new BaseDiff(properties);
+            BaseAssignment.create = function create(properties) {
+                return new BaseAssignment(properties);
             };
     
             /**
-             * Encodes the specified BaseDiff message. Does not implicitly {@link sst.BaseDiff.verify|verify} messages.
+             * Encodes the specified BaseAssignment message. Does not implicitly {@link sst.BaseAssignment.verify|verify} messages.
              * @function encode
-             * @memberof sst.BaseDiff
+             * @memberof sst.BaseAssignment
              * @static
-             * @param {sst.IBaseDiff} message BaseDiff message or plain object to encode
+             * @param {sst.IBaseAssignment} message BaseAssignment message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            BaseDiff.encode = function encode(message, writer) {
+            BaseAssignment.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
                 if (message.path != null && message.hasOwnProperty("path"))
                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.path);
-                if (message.value != null && message.hasOwnProperty("value"))
-                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.value);
+                if (message.data != null && message.hasOwnProperty("data"))
+                    $root.google.protobuf.Any.encode(message.data, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                 return writer;
             };
     
             /**
-             * Encodes the specified BaseDiff message, length delimited. Does not implicitly {@link sst.BaseDiff.verify|verify} messages.
+             * Encodes the specified BaseAssignment message, length delimited. Does not implicitly {@link sst.BaseAssignment.verify|verify} messages.
              * @function encodeDelimited
-             * @memberof sst.BaseDiff
+             * @memberof sst.BaseAssignment
              * @static
-             * @param {sst.IBaseDiff} message BaseDiff message or plain object to encode
+             * @param {sst.IBaseAssignment} message BaseAssignment message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            BaseDiff.encodeDelimited = function encodeDelimited(message, writer) {
+            BaseAssignment.encodeDelimited = function encodeDelimited(message, writer) {
                 return this.encode(message, writer).ldelim();
             };
     
             /**
-             * Decodes a BaseDiff message from the specified reader or buffer.
+             * Decodes a BaseAssignment message from the specified reader or buffer.
              * @function decode
-             * @memberof sst.BaseDiff
+             * @memberof sst.BaseAssignment
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
              * @param {number} [length] Message length if known beforehand
-             * @returns {sst.BaseDiff} BaseDiff
+             * @returns {sst.BaseAssignment} BaseAssignment
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            BaseDiff.decode = function decode(reader, length) {
+            BaseAssignment.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.sst.BaseDiff();
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.sst.BaseAssignment();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
                     switch (tag >>> 3) {
@@ -1118,7 +1465,7 @@
                         message.path = reader.string();
                         break;
                     case 2:
-                        message.value = reader.int32();
+                        message.data = $root.google.protobuf.Any.decode(reader, reader.uint32());
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -1129,99 +1476,347 @@
             };
     
             /**
-             * Decodes a BaseDiff message from the specified reader or buffer, length delimited.
+             * Decodes a BaseAssignment message from the specified reader or buffer, length delimited.
              * @function decodeDelimited
-             * @memberof sst.BaseDiff
+             * @memberof sst.BaseAssignment
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {sst.BaseDiff} BaseDiff
+             * @returns {sst.BaseAssignment} BaseAssignment
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            BaseDiff.decodeDelimited = function decodeDelimited(reader) {
+            BaseAssignment.decodeDelimited = function decodeDelimited(reader) {
                 if (!(reader instanceof $Reader))
                     reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
             };
     
             /**
-             * Verifies a BaseDiff message.
+             * Verifies a BaseAssignment message.
              * @function verify
-             * @memberof sst.BaseDiff
+             * @memberof sst.BaseAssignment
              * @static
              * @param {Object.<string,*>} message Plain object to verify
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
-            BaseDiff.verify = function verify(message) {
+            BaseAssignment.verify = function verify(message) {
                 if (typeof message !== "object" || message === null)
                     return "object expected";
                 if (message.path != null && message.hasOwnProperty("path"))
                     if (!$util.isString(message.path))
                         return "path: string expected";
-                if (message.value != null && message.hasOwnProperty("value"))
-                    if (!$util.isInteger(message.value))
-                        return "value: integer expected";
+                if (message.data != null && message.hasOwnProperty("data")) {
+                    var error = $root.google.protobuf.Any.verify(message.data);
+                    if (error)
+                        return "data." + error;
+                }
                 return null;
             };
     
             /**
-             * Creates a BaseDiff message from a plain object. Also converts values to their respective internal types.
+             * Creates a BaseAssignment message from a plain object. Also converts values to their respective internal types.
              * @function fromObject
-             * @memberof sst.BaseDiff
+             * @memberof sst.BaseAssignment
              * @static
              * @param {Object.<string,*>} object Plain object
-             * @returns {sst.BaseDiff} BaseDiff
+             * @returns {sst.BaseAssignment} BaseAssignment
              */
-            BaseDiff.fromObject = function fromObject(object) {
-                if (object instanceof $root.sst.BaseDiff)
+            BaseAssignment.fromObject = function fromObject(object) {
+                if (object instanceof $root.sst.BaseAssignment)
                     return object;
-                var message = new $root.sst.BaseDiff();
+                var message = new $root.sst.BaseAssignment();
                 if (object.path != null)
                     message.path = String(object.path);
-                if (object.value != null)
-                    message.value = object.value | 0;
+                if (object.data != null) {
+                    if (typeof object.data !== "object")
+                        throw TypeError(".sst.BaseAssignment.data: object expected");
+                    message.data = $root.google.protobuf.Any.fromObject(object.data);
+                }
                 return message;
             };
     
             /**
-             * Creates a plain object from a BaseDiff message. Also converts values to other types if specified.
+             * Creates a plain object from a BaseAssignment message. Also converts values to other types if specified.
              * @function toObject
-             * @memberof sst.BaseDiff
+             * @memberof sst.BaseAssignment
              * @static
-             * @param {sst.BaseDiff} message BaseDiff
+             * @param {sst.BaseAssignment} message BaseAssignment
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            BaseDiff.toObject = function toObject(message, options) {
+            BaseAssignment.toObject = function toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
                 if (options.defaults) {
                     object.path = "";
-                    object.value = 0;
+                    object.data = null;
                 }
                 if (message.path != null && message.hasOwnProperty("path"))
                     object.path = message.path;
-                if (message.value != null && message.hasOwnProperty("value"))
-                    object.value = message.value;
+                if (message.data != null && message.hasOwnProperty("data"))
+                    object.data = $root.google.protobuf.Any.toObject(message.data, options);
                 return object;
             };
     
             /**
-             * Converts this BaseDiff to JSON.
+             * Converts this BaseAssignment to JSON.
              * @function toJSON
-             * @memberof sst.BaseDiff
+             * @memberof sst.BaseAssignment
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            BaseDiff.prototype.toJSON = function toJSON() {
+            BaseAssignment.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
     
-            return BaseDiff;
+            return BaseAssignment;
         })();
     
         return sst;
+    })();
+    
+    $root.google = (function() {
+    
+        /**
+         * Namespace google.
+         * @exports google
+         * @namespace
+         */
+        var google = {};
+    
+        google.protobuf = (function() {
+    
+            /**
+             * Namespace protobuf.
+             * @memberof google
+             * @namespace
+             */
+            var protobuf = {};
+    
+            protobuf.Any = (function() {
+    
+                /**
+                 * Properties of an Any.
+                 * @memberof google.protobuf
+                 * @interface IAny
+                 * @property {string|null} [type_url] Any type_url
+                 * @property {Uint8Array|null} [value] Any value
+                 */
+    
+                /**
+                 * Constructs a new Any.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Any.
+                 * @implements IAny
+                 * @constructor
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 */
+                function Any(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Any type_url.
+                 * @member {string} type_url
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.type_url = "";
+    
+                /**
+                 * Any value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new Any instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 * @returns {google.protobuf.Any} Any instance
+                 */
+                Any.create = function create(properties) {
+                    return new Any(properties);
+                };
+    
+                /**
+                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type_url = reader.string();
+                            break;
+                        case 2:
+                            message.value = reader.bytes();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Any message.
+                 * @function verify
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Any.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        if (!$util.isString(message.type_url))
+                            return "type_url: string expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Any} Any
+                 */
+                Any.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Any)
+                        return object;
+                    var message = new $root.google.protobuf.Any();
+                    if (object.type_url != null)
+                        message.type_url = String(object.type_url);
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Any message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.Any} message Any
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Any.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type_url = "";
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    }
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        object.type_url = message.type_url;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Any to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Any.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Any;
+            })();
+    
+            return protobuf;
+        })();
+    
+        return google;
     })();
 
     return $root;
