@@ -104,7 +104,10 @@ class DataBundle {
      * @param value
      */
     addBaseAssignment(path, value) {
-
+        let ass = new sst.AssignmentMod();
+        ass.path = path;
+        ass.data = value;
+        this._modification.add(ass);
     }
 
     getModification() {
@@ -115,9 +118,10 @@ class DataBundle {
         this._modification = new Set();
     }
 
+    // 将一组改动应用到数据集
     pushModification(modification) {
         for(let mod in modification) {
-            if(mod instanceof sst.BaseAssignment) {
+            if(mod instanceof sst.AssignmentMod) {
                 this.assignDataByPath(mod.path, mod.data);
             }
         }
@@ -126,9 +130,19 @@ class DataBundle {
     assignDataByPath(path, data) {
         path = path.split(path, "/");
         let prop_name = path.pop();
-        for(let p in path) {
-
+        let parent;
+        for(let key in path) {
+            let p = path[key];
+            if(p === ".") {
+                parent = this._data;
+            } else {
+                parent = parent[p];
+            }
         }
+
+        delete parent[prop_name];
+        parent[prop_name] = data;
+
     }
 
 }

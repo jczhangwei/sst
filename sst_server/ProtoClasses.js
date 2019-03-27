@@ -1358,25 +1358,25 @@
             return ArrayDiff;
         })();
     
-        sst.BaseAssignment = (function() {
+        sst.AssignmentMod = (function() {
     
             /**
-             * Properties of a BaseAssignment.
+             * Properties of an AssignmentMod.
              * @memberof sst
-             * @interface IBaseAssignment
-             * @property {string|null} [path] BaseAssignment path
-             * @property {google.protobuf.IAny|null} [data] BaseAssignment data
+             * @interface IAssignmentMod
+             * @property {string|null} [path] AssignmentMod path
+             * @property {google.protobuf.IAny|null} [data] AssignmentMod data
              */
     
             /**
-             * Constructs a new BaseAssignment.
+             * Constructs a new AssignmentMod.
              * @memberof sst
-             * @classdesc Represents a BaseAssignment.
-             * @implements IBaseAssignment
+             * @classdesc Represents an AssignmentMod.
+             * @implements IAssignmentMod
              * @constructor
-             * @param {sst.IBaseAssignment=} [properties] Properties to set
+             * @param {sst.IAssignmentMod=} [properties] Properties to set
              */
-            function BaseAssignment(properties) {
+            function AssignmentMod(properties) {
                 if (properties)
                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                         if (properties[keys[i]] != null)
@@ -1384,43 +1384,43 @@
             }
     
             /**
-             * BaseAssignment path.
+             * AssignmentMod path.
              * @member {string} path
-             * @memberof sst.BaseAssignment
+             * @memberof sst.AssignmentMod
              * @instance
              */
-            BaseAssignment.prototype.path = "";
+            AssignmentMod.prototype.path = "";
     
             /**
-             * BaseAssignment data.
+             * AssignmentMod data.
              * @member {google.protobuf.IAny|null|undefined} data
-             * @memberof sst.BaseAssignment
+             * @memberof sst.AssignmentMod
              * @instance
              */
-            BaseAssignment.prototype.data = null;
+            AssignmentMod.prototype.data = null;
     
             /**
-             * Creates a new BaseAssignment instance using the specified properties.
+             * Creates a new AssignmentMod instance using the specified properties.
              * @function create
-             * @memberof sst.BaseAssignment
+             * @memberof sst.AssignmentMod
              * @static
-             * @param {sst.IBaseAssignment=} [properties] Properties to set
-             * @returns {sst.BaseAssignment} BaseAssignment instance
+             * @param {sst.IAssignmentMod=} [properties] Properties to set
+             * @returns {sst.AssignmentMod} AssignmentMod instance
              */
-            BaseAssignment.create = function create(properties) {
-                return new BaseAssignment(properties);
+            AssignmentMod.create = function create(properties) {
+                return new AssignmentMod(properties);
             };
     
             /**
-             * Encodes the specified BaseAssignment message. Does not implicitly {@link sst.BaseAssignment.verify|verify} messages.
+             * Encodes the specified AssignmentMod message. Does not implicitly {@link sst.AssignmentMod.verify|verify} messages.
              * @function encode
-             * @memberof sst.BaseAssignment
+             * @memberof sst.AssignmentMod
              * @static
-             * @param {sst.IBaseAssignment} message BaseAssignment message or plain object to encode
+             * @param {sst.IAssignmentMod} message AssignmentMod message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            BaseAssignment.encode = function encode(message, writer) {
+            AssignmentMod.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
                 if (message.path != null && message.hasOwnProperty("path"))
@@ -1431,33 +1431,33 @@
             };
     
             /**
-             * Encodes the specified BaseAssignment message, length delimited. Does not implicitly {@link sst.BaseAssignment.verify|verify} messages.
+             * Encodes the specified AssignmentMod message, length delimited. Does not implicitly {@link sst.AssignmentMod.verify|verify} messages.
              * @function encodeDelimited
-             * @memberof sst.BaseAssignment
+             * @memberof sst.AssignmentMod
              * @static
-             * @param {sst.IBaseAssignment} message BaseAssignment message or plain object to encode
+             * @param {sst.IAssignmentMod} message AssignmentMod message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            BaseAssignment.encodeDelimited = function encodeDelimited(message, writer) {
+            AssignmentMod.encodeDelimited = function encodeDelimited(message, writer) {
                 return this.encode(message, writer).ldelim();
             };
     
             /**
-             * Decodes a BaseAssignment message from the specified reader or buffer.
+             * Decodes an AssignmentMod message from the specified reader or buffer.
              * @function decode
-             * @memberof sst.BaseAssignment
+             * @memberof sst.AssignmentMod
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
              * @param {number} [length] Message length if known beforehand
-             * @returns {sst.BaseAssignment} BaseAssignment
+             * @returns {sst.AssignmentMod} AssignmentMod
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            BaseAssignment.decode = function decode(reader, length) {
+            AssignmentMod.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.sst.BaseAssignment();
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.sst.AssignmentMod();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
                     switch (tag >>> 3) {
@@ -1476,30 +1476,30 @@
             };
     
             /**
-             * Decodes a BaseAssignment message from the specified reader or buffer, length delimited.
+             * Decodes an AssignmentMod message from the specified reader or buffer, length delimited.
              * @function decodeDelimited
-             * @memberof sst.BaseAssignment
+             * @memberof sst.AssignmentMod
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {sst.BaseAssignment} BaseAssignment
+             * @returns {sst.AssignmentMod} AssignmentMod
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            BaseAssignment.decodeDelimited = function decodeDelimited(reader) {
+            AssignmentMod.decodeDelimited = function decodeDelimited(reader) {
                 if (!(reader instanceof $Reader))
                     reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
             };
     
             /**
-             * Verifies a BaseAssignment message.
+             * Verifies an AssignmentMod message.
              * @function verify
-             * @memberof sst.BaseAssignment
+             * @memberof sst.AssignmentMod
              * @static
              * @param {Object.<string,*>} message Plain object to verify
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
-            BaseAssignment.verify = function verify(message) {
+            AssignmentMod.verify = function verify(message) {
                 if (typeof message !== "object" || message === null)
                     return "object expected";
                 if (message.path != null && message.hasOwnProperty("path"))
@@ -1514,37 +1514,37 @@
             };
     
             /**
-             * Creates a BaseAssignment message from a plain object. Also converts values to their respective internal types.
+             * Creates an AssignmentMod message from a plain object. Also converts values to their respective internal types.
              * @function fromObject
-             * @memberof sst.BaseAssignment
+             * @memberof sst.AssignmentMod
              * @static
              * @param {Object.<string,*>} object Plain object
-             * @returns {sst.BaseAssignment} BaseAssignment
+             * @returns {sst.AssignmentMod} AssignmentMod
              */
-            BaseAssignment.fromObject = function fromObject(object) {
-                if (object instanceof $root.sst.BaseAssignment)
+            AssignmentMod.fromObject = function fromObject(object) {
+                if (object instanceof $root.sst.AssignmentMod)
                     return object;
-                var message = new $root.sst.BaseAssignment();
+                var message = new $root.sst.AssignmentMod();
                 if (object.path != null)
                     message.path = String(object.path);
                 if (object.data != null) {
                     if (typeof object.data !== "object")
-                        throw TypeError(".sst.BaseAssignment.data: object expected");
+                        throw TypeError(".sst.AssignmentMod.data: object expected");
                     message.data = $root.google.protobuf.Any.fromObject(object.data);
                 }
                 return message;
             };
     
             /**
-             * Creates a plain object from a BaseAssignment message. Also converts values to other types if specified.
+             * Creates a plain object from an AssignmentMod message. Also converts values to other types if specified.
              * @function toObject
-             * @memberof sst.BaseAssignment
+             * @memberof sst.AssignmentMod
              * @static
-             * @param {sst.BaseAssignment} message BaseAssignment
+             * @param {sst.AssignmentMod} message AssignmentMod
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            BaseAssignment.toObject = function toObject(message, options) {
+            AssignmentMod.toObject = function toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
@@ -1560,17 +1560,204 @@
             };
     
             /**
-             * Converts this BaseAssignment to JSON.
+             * Converts this AssignmentMod to JSON.
              * @function toJSON
-             * @memberof sst.BaseAssignment
+             * @memberof sst.AssignmentMod
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            BaseAssignment.prototype.toJSON = function toJSON() {
+            AssignmentMod.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
     
-            return BaseAssignment;
+            return AssignmentMod;
+        })();
+    
+        sst.DeleteMod = (function() {
+    
+            /**
+             * Properties of a DeleteMod.
+             * @memberof sst
+             * @interface IDeleteMod
+             * @property {string|null} [path] DeleteMod path
+             */
+    
+            /**
+             * Constructs a new DeleteMod.
+             * @memberof sst
+             * @classdesc Represents a DeleteMod.
+             * @implements IDeleteMod
+             * @constructor
+             * @param {sst.IDeleteMod=} [properties] Properties to set
+             */
+            function DeleteMod(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+    
+            /**
+             * DeleteMod path.
+             * @member {string} path
+             * @memberof sst.DeleteMod
+             * @instance
+             */
+            DeleteMod.prototype.path = "";
+    
+            /**
+             * Creates a new DeleteMod instance using the specified properties.
+             * @function create
+             * @memberof sst.DeleteMod
+             * @static
+             * @param {sst.IDeleteMod=} [properties] Properties to set
+             * @returns {sst.DeleteMod} DeleteMod instance
+             */
+            DeleteMod.create = function create(properties) {
+                return new DeleteMod(properties);
+            };
+    
+            /**
+             * Encodes the specified DeleteMod message. Does not implicitly {@link sst.DeleteMod.verify|verify} messages.
+             * @function encode
+             * @memberof sst.DeleteMod
+             * @static
+             * @param {sst.IDeleteMod} message DeleteMod message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            DeleteMod.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.path != null && message.hasOwnProperty("path"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.path);
+                return writer;
+            };
+    
+            /**
+             * Encodes the specified DeleteMod message, length delimited. Does not implicitly {@link sst.DeleteMod.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof sst.DeleteMod
+             * @static
+             * @param {sst.IDeleteMod} message DeleteMod message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            DeleteMod.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+    
+            /**
+             * Decodes a DeleteMod message from the specified reader or buffer.
+             * @function decode
+             * @memberof sst.DeleteMod
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {sst.DeleteMod} DeleteMod
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            DeleteMod.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.sst.DeleteMod();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.path = reader.string();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+    
+            /**
+             * Decodes a DeleteMod message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof sst.DeleteMod
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {sst.DeleteMod} DeleteMod
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            DeleteMod.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+    
+            /**
+             * Verifies a DeleteMod message.
+             * @function verify
+             * @memberof sst.DeleteMod
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            DeleteMod.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.path != null && message.hasOwnProperty("path"))
+                    if (!$util.isString(message.path))
+                        return "path: string expected";
+                return null;
+            };
+    
+            /**
+             * Creates a DeleteMod message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof sst.DeleteMod
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {sst.DeleteMod} DeleteMod
+             */
+            DeleteMod.fromObject = function fromObject(object) {
+                if (object instanceof $root.sst.DeleteMod)
+                    return object;
+                var message = new $root.sst.DeleteMod();
+                if (object.path != null)
+                    message.path = String(object.path);
+                return message;
+            };
+    
+            /**
+             * Creates a plain object from a DeleteMod message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof sst.DeleteMod
+             * @static
+             * @param {sst.DeleteMod} message DeleteMod
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            DeleteMod.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults)
+                    object.path = "";
+                if (message.path != null && message.hasOwnProperty("path"))
+                    object.path = message.path;
+                return object;
+            };
+    
+            /**
+             * Converts this DeleteMod to JSON.
+             * @function toJSON
+             * @memberof sst.DeleteMod
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            DeleteMod.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+    
+            return DeleteMod;
         })();
     
         return sst;
