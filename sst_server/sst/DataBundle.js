@@ -87,9 +87,7 @@ class DataBundle {
                     self.proxies.del(prop_path);
                 }
                 self.addBaseAssignment(prop_path, value);
-                // Reflect.set(target, propKey, value);
-                target[propKey] = value;
-                return true;
+                return Reflect.set(target, propKey, value);
             },
 
             get: function(target, propKey, receiver) {
