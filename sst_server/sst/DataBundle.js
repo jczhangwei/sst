@@ -121,7 +121,7 @@ class DataBundle {
     }
 
     getParentByPath(path) {
-        path = path.split(path, "/");
+        path = path.split("/");
         path.pop();
         let parent;
         for(let key in path) {
@@ -132,22 +132,24 @@ class DataBundle {
                 parent = parent[p];
             }
         }
+
+        return parent;
     }
 
     getNameByPath(path) {
-        path = path.split(path, "/");
+        path = path.split("/");
         return path.pop();
     }
 
     // 将一组改动应用到数据集
     applyModification(modification) {
-        for(let mod in modification) {
+        modification.forEach(function(mod) {
             if(mod instanceof sst.AssignmentMod) {
                 this.assignDataByPath(mod.path, mod.data);
             } else if(mod instanceof sst.DeleteMod) {
                 this.deleteDataByPath();
             }
-        }
+        }, this);
     }
 
     assignDataByPath(path, data) {

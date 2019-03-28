@@ -21,7 +21,6 @@ class SubscribeTest {
 
     run() {
         let server_data = new sst.UserBaseInfo();
-        server_data.pass_word = "888888";
 
         let server_bundle_name = "server_data";
         BundleManager.instance.addDataBundle(server_bundle_name, server_data);
@@ -35,8 +34,6 @@ class SubscribeTest {
         let client_proxy = client_bundle.proxy;
 
         assert.deepStrictEqual(server_data, client_data);
-
-        server_data.pass_word = "888888";
 
         server_proxy.pass_word = "1234123";
 
