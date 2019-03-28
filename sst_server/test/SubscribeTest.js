@@ -1,7 +1,7 @@
-const assert = require('assert').strict;
+const assert = require('assert');
 
 let BundleManager = require("../sst/DataBundleManager");
-let sst = require("../ProtoClasses");
+let sst = require("../ProtoClasses").sst;
 let util = require("../util/Util");
 
 
@@ -21,6 +21,8 @@ class SubscribeTest {
 
     run() {
         let server_data = new sst.UserBaseInfo();
+        server_data.pass_word = "888888";
+
         let server_bundle_name = "server_data";
         BundleManager.instance.addDataBundle(server_bundle_name, server_data);
         let server_bundle = BundleManager.instance.getBundleByName(server_bundle_name);
@@ -32,16 +34,18 @@ class SubscribeTest {
         let client_bundle = BundleManager.instance.getBundleByName(client_bundle_name);
         let client_proxy = client_bundle.proxy;
 
-        assert.deepStrictEqual(server_data, server_proxy);
+        assert.deepStrictEqual(server_data, client_data);
+
+        server_data.pass_word = "888888";
 
         server_proxy.pass_word = "1234123";
 
         let mod = server_bundle.getModification();
         util.log(mod);
 
-        client_bundle.pushModification(mod);
+        client_bundle.applyModification(mod);
 
-        // assert.deepStrictEqual(server_data, client_data);
+        assert.deepStrictEqual(server_data, client_data);
 
 
 

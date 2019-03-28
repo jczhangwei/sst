@@ -1,3 +1,5 @@
+let sst = require("../ProtoClasses").sst;
+
 let root_proxy_name = ".";
 
 class DataBundle {
@@ -62,8 +64,8 @@ class DataBundle {
 
                 if(typeof pro === "object") {
                     let path = `${data_path}/${key}`;
-                    let p = this.addProxyForObject(data_obj, path);
-                    this.proxies.add(path, p);
+                    let p = this.addProxyForObject(pro, path);
+                    this.proxies.set(path, p);
                 }
 
             }
@@ -72,7 +74,7 @@ class DataBundle {
 
         let handler = this.getObjectHandler(data_obj, data_path);
         let proxy = new Proxy(data_obj, handler);
-        this.proxies.add(data_path, proxy);
+        this.proxies.set(data_path, proxy);
     }
 
     getObjectHandler(data_obj, data_path) {
@@ -80,18 +82,20 @@ class DataBundle {
         return {
             set: function(target, propKey, value, receiver) {
                 let res = Reflect.get(target, propKey);
-                let prop_path = data_path + propKey;
+                let prop_path = data_path + "/" + propKey;
                 if(typeof res === "object") {
                     self.proxies.del(prop_path);
                 }
-                Reflect.set(target, propKey, value);
                 self.addBaseAssignment(prop_path, value);
+                // Reflect.set(target, propKey, value);
+                target[propKey] = value;
+                return true;
             },
 
             get: function(target, propKey, receiver) {
                 let res = Reflect.get(target, propKey);
                 if(typeof res === "object") {
-                    return self.proxies.get(data_path + propKey);
+                    return self.proxies.get(data_path + "/" + propKey);
                 }
                 return res;
             }
@@ -118,18 +122,9 @@ class DataBundle {
         this._modification = new Set();
     }
 
-    // 将一组改动应用到数据集
-    pushModification(modification) {
-        for(let mod in modification) {
-            if(mod instanceof sst.AssignmentMod) {
-                this.assignDataByPath(mod.path, mod.data);
-            }
-        }
-    }
-
-    assignDataByPath(path, data) {
+    getParentByPath(path) {
         path = path.split(path, "/");
-        let prop_name = path.pop();
+        path.pop();
         let parent;
         for(let key in path) {
             let p = path[key];
@@ -139,10 +134,35 @@ class DataBundle {
                 parent = parent[p];
             }
         }
+    }
 
+    getNameByPath(path) {
+        path = path.split(path, "/");
+        return path.pop();
+    }
+
+    // 将一组改动应用到数据集
+    applyModification(modification) {
+        for(let mod in modification) {
+            if(mod instanceof sst.AssignmentMod) {
+                this.assignDataByPath(mod.path, mod.data);
+            } else if(mod instanceof sst.DeleteMod) {
+                this.deleteDataByPath();
+            }
+        }
+    }
+
+    assignDataByPath(path, data) {
+        let prop_name = this.getNameByPath(path);
+        let parent = this.getParentByPath(path);
         delete parent[prop_name];
         parent[prop_name] = data;
+    }
 
+    deleteDataByPath() {
+        let prop_name = this.getNameByPath(path);
+        let parent = this.getParentByPath(path);
+        delete parent[prop_name];
     }
 
 }
