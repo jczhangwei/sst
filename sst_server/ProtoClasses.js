@@ -1126,26 +1126,29 @@
             return ErrorStatus;
         })();
     
-        sst.ArrayDiff = (function() {
+        sst.ArrayMod = (function() {
     
             /**
-             * Properties of an ArrayDiff.
+             * Properties of an ArrayMod.
              * @memberof sst
-             * @interface IArrayDiff
-             * @property {number|null} [origin_start] ArrayDiff origin_start
-             * @property {number|null} [origin_end] ArrayDiff origin_end
-             * @property {number|null} [result_start] ArrayDiff result_start
+             * @interface IArrayMod
+             * @property {number|null} [origin_start] ArrayMod origin_start
+             * @property {number|null} [origin_end] ArrayMod origin_end
+             * @property {number|null} [result_start] ArrayMod result_start
+             * @property {number|null} [result_end] ArrayMod result_end
+             * @property {Array.<google.protobuf.IAny>|null} [data] ArrayMod data
              */
     
             /**
-             * Constructs a new ArrayDiff.
+             * Constructs a new ArrayMod.
              * @memberof sst
-             * @classdesc Represents an ArrayDiff.
-             * @implements IArrayDiff
+             * @classdesc Represents an ArrayMod.
+             * @implements IArrayMod
              * @constructor
-             * @param {sst.IArrayDiff=} [properties] Properties to set
+             * @param {sst.IArrayMod=} [properties] Properties to set
              */
-            function ArrayDiff(properties) {
+            function ArrayMod(properties) {
+                this.data = [];
                 if (properties)
                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                         if (properties[keys[i]] != null)
@@ -1153,51 +1156,67 @@
             }
     
             /**
-             * ArrayDiff origin_start.
+             * ArrayMod origin_start.
              * @member {number} origin_start
-             * @memberof sst.ArrayDiff
+             * @memberof sst.ArrayMod
              * @instance
              */
-            ArrayDiff.prototype.origin_start = 0;
+            ArrayMod.prototype.origin_start = 0;
     
             /**
-             * ArrayDiff origin_end.
+             * ArrayMod origin_end.
              * @member {number} origin_end
-             * @memberof sst.ArrayDiff
+             * @memberof sst.ArrayMod
              * @instance
              */
-            ArrayDiff.prototype.origin_end = 0;
+            ArrayMod.prototype.origin_end = 0;
     
             /**
-             * ArrayDiff result_start.
+             * ArrayMod result_start.
              * @member {number} result_start
-             * @memberof sst.ArrayDiff
+             * @memberof sst.ArrayMod
              * @instance
              */
-            ArrayDiff.prototype.result_start = 0;
+            ArrayMod.prototype.result_start = 0;
     
             /**
-             * Creates a new ArrayDiff instance using the specified properties.
-             * @function create
-             * @memberof sst.ArrayDiff
-             * @static
-             * @param {sst.IArrayDiff=} [properties] Properties to set
-             * @returns {sst.ArrayDiff} ArrayDiff instance
+             * ArrayMod result_end.
+             * @member {number} result_end
+             * @memberof sst.ArrayMod
+             * @instance
              */
-            ArrayDiff.create = function create(properties) {
-                return new ArrayDiff(properties);
+            ArrayMod.prototype.result_end = 0;
+    
+            /**
+             * ArrayMod data.
+             * @member {Array.<google.protobuf.IAny>} data
+             * @memberof sst.ArrayMod
+             * @instance
+             */
+            ArrayMod.prototype.data = $util.emptyArray;
+    
+            /**
+             * Creates a new ArrayMod instance using the specified properties.
+             * @function create
+             * @memberof sst.ArrayMod
+             * @static
+             * @param {sst.IArrayMod=} [properties] Properties to set
+             * @returns {sst.ArrayMod} ArrayMod instance
+             */
+            ArrayMod.create = function create(properties) {
+                return new ArrayMod(properties);
             };
     
             /**
-             * Encodes the specified ArrayDiff message. Does not implicitly {@link sst.ArrayDiff.verify|verify} messages.
+             * Encodes the specified ArrayMod message. Does not implicitly {@link sst.ArrayMod.verify|verify} messages.
              * @function encode
-             * @memberof sst.ArrayDiff
+             * @memberof sst.ArrayMod
              * @static
-             * @param {sst.IArrayDiff} message ArrayDiff message or plain object to encode
+             * @param {sst.IArrayMod} message ArrayMod message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            ArrayDiff.encode = function encode(message, writer) {
+            ArrayMod.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
                 if (message.origin_start != null && message.hasOwnProperty("origin_start"))
@@ -1206,37 +1225,42 @@
                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.origin_end);
                 if (message.result_start != null && message.hasOwnProperty("result_start"))
                     writer.uint32(/* id 3, wireType 0 =*/24).int32(message.result_start);
+                if (message.result_end != null && message.hasOwnProperty("result_end"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.result_end);
+                if (message.data != null && message.data.length)
+                    for (var i = 0; i < message.data.length; ++i)
+                        $root.google.protobuf.Any.encode(message.data[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                 return writer;
             };
     
             /**
-             * Encodes the specified ArrayDiff message, length delimited. Does not implicitly {@link sst.ArrayDiff.verify|verify} messages.
+             * Encodes the specified ArrayMod message, length delimited. Does not implicitly {@link sst.ArrayMod.verify|verify} messages.
              * @function encodeDelimited
-             * @memberof sst.ArrayDiff
+             * @memberof sst.ArrayMod
              * @static
-             * @param {sst.IArrayDiff} message ArrayDiff message or plain object to encode
+             * @param {sst.IArrayMod} message ArrayMod message or plain object to encode
              * @param {$protobuf.Writer} [writer] Writer to encode to
              * @returns {$protobuf.Writer} Writer
              */
-            ArrayDiff.encodeDelimited = function encodeDelimited(message, writer) {
+            ArrayMod.encodeDelimited = function encodeDelimited(message, writer) {
                 return this.encode(message, writer).ldelim();
             };
     
             /**
-             * Decodes an ArrayDiff message from the specified reader or buffer.
+             * Decodes an ArrayMod message from the specified reader or buffer.
              * @function decode
-             * @memberof sst.ArrayDiff
+             * @memberof sst.ArrayMod
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
              * @param {number} [length] Message length if known beforehand
-             * @returns {sst.ArrayDiff} ArrayDiff
+             * @returns {sst.ArrayMod} ArrayMod
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            ArrayDiff.decode = function decode(reader, length) {
+            ArrayMod.decode = function decode(reader, length) {
                 if (!(reader instanceof $Reader))
                     reader = $Reader.create(reader);
-                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.sst.ArrayDiff();
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.sst.ArrayMod();
                 while (reader.pos < end) {
                     var tag = reader.uint32();
                     switch (tag >>> 3) {
@@ -1249,6 +1273,14 @@
                     case 3:
                         message.result_start = reader.int32();
                         break;
+                    case 4:
+                        message.result_end = reader.int32();
+                        break;
+                    case 5:
+                        if (!(message.data && message.data.length))
+                            message.data = [];
+                        message.data.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                        break;
                     default:
                         reader.skipType(tag & 7);
                         break;
@@ -1258,30 +1290,30 @@
             };
     
             /**
-             * Decodes an ArrayDiff message from the specified reader or buffer, length delimited.
+             * Decodes an ArrayMod message from the specified reader or buffer, length delimited.
              * @function decodeDelimited
-             * @memberof sst.ArrayDiff
+             * @memberof sst.ArrayMod
              * @static
              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-             * @returns {sst.ArrayDiff} ArrayDiff
+             * @returns {sst.ArrayMod} ArrayMod
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            ArrayDiff.decodeDelimited = function decodeDelimited(reader) {
+            ArrayMod.decodeDelimited = function decodeDelimited(reader) {
                 if (!(reader instanceof $Reader))
                     reader = new $Reader(reader);
                 return this.decode(reader, reader.uint32());
             };
     
             /**
-             * Verifies an ArrayDiff message.
+             * Verifies an ArrayMod message.
              * @function verify
-             * @memberof sst.ArrayDiff
+             * @memberof sst.ArrayMod
              * @static
              * @param {Object.<string,*>} message Plain object to verify
              * @returns {string|null} `null` if valid, otherwise the reason why it is not
              */
-            ArrayDiff.verify = function verify(message) {
+            ArrayMod.verify = function verify(message) {
                 if (typeof message !== "object" || message === null)
                     return "object expected";
                 if (message.origin_start != null && message.hasOwnProperty("origin_start"))
@@ -1293,47 +1325,74 @@
                 if (message.result_start != null && message.hasOwnProperty("result_start"))
                     if (!$util.isInteger(message.result_start))
                         return "result_start: integer expected";
+                if (message.result_end != null && message.hasOwnProperty("result_end"))
+                    if (!$util.isInteger(message.result_end))
+                        return "result_end: integer expected";
+                if (message.data != null && message.hasOwnProperty("data")) {
+                    if (!Array.isArray(message.data))
+                        return "data: array expected";
+                    for (var i = 0; i < message.data.length; ++i) {
+                        var error = $root.google.protobuf.Any.verify(message.data[i]);
+                        if (error)
+                            return "data." + error;
+                    }
+                }
                 return null;
             };
     
             /**
-             * Creates an ArrayDiff message from a plain object. Also converts values to their respective internal types.
+             * Creates an ArrayMod message from a plain object. Also converts values to their respective internal types.
              * @function fromObject
-             * @memberof sst.ArrayDiff
+             * @memberof sst.ArrayMod
              * @static
              * @param {Object.<string,*>} object Plain object
-             * @returns {sst.ArrayDiff} ArrayDiff
+             * @returns {sst.ArrayMod} ArrayMod
              */
-            ArrayDiff.fromObject = function fromObject(object) {
-                if (object instanceof $root.sst.ArrayDiff)
+            ArrayMod.fromObject = function fromObject(object) {
+                if (object instanceof $root.sst.ArrayMod)
                     return object;
-                var message = new $root.sst.ArrayDiff();
+                var message = new $root.sst.ArrayMod();
                 if (object.origin_start != null)
                     message.origin_start = object.origin_start | 0;
                 if (object.origin_end != null)
                     message.origin_end = object.origin_end | 0;
                 if (object.result_start != null)
                     message.result_start = object.result_start | 0;
+                if (object.result_end != null)
+                    message.result_end = object.result_end | 0;
+                if (object.data) {
+                    if (!Array.isArray(object.data))
+                        throw TypeError(".sst.ArrayMod.data: array expected");
+                    message.data = [];
+                    for (var i = 0; i < object.data.length; ++i) {
+                        if (typeof object.data[i] !== "object")
+                            throw TypeError(".sst.ArrayMod.data: object expected");
+                        message.data[i] = $root.google.protobuf.Any.fromObject(object.data[i]);
+                    }
+                }
                 return message;
             };
     
             /**
-             * Creates a plain object from an ArrayDiff message. Also converts values to other types if specified.
+             * Creates a plain object from an ArrayMod message. Also converts values to other types if specified.
              * @function toObject
-             * @memberof sst.ArrayDiff
+             * @memberof sst.ArrayMod
              * @static
-             * @param {sst.ArrayDiff} message ArrayDiff
+             * @param {sst.ArrayMod} message ArrayMod
              * @param {$protobuf.IConversionOptions} [options] Conversion options
              * @returns {Object.<string,*>} Plain object
              */
-            ArrayDiff.toObject = function toObject(message, options) {
+            ArrayMod.toObject = function toObject(message, options) {
                 if (!options)
                     options = {};
                 var object = {};
+                if (options.arrays || options.defaults)
+                    object.data = [];
                 if (options.defaults) {
                     object.origin_start = 0;
                     object.origin_end = 0;
                     object.result_start = 0;
+                    object.result_end = 0;
                 }
                 if (message.origin_start != null && message.hasOwnProperty("origin_start"))
                     object.origin_start = message.origin_start;
@@ -1341,21 +1400,28 @@
                     object.origin_end = message.origin_end;
                 if (message.result_start != null && message.hasOwnProperty("result_start"))
                     object.result_start = message.result_start;
+                if (message.result_end != null && message.hasOwnProperty("result_end"))
+                    object.result_end = message.result_end;
+                if (message.data && message.data.length) {
+                    object.data = [];
+                    for (var j = 0; j < message.data.length; ++j)
+                        object.data[j] = $root.google.protobuf.Any.toObject(message.data[j], options);
+                }
                 return object;
             };
     
             /**
-             * Converts this ArrayDiff to JSON.
+             * Converts this ArrayMod to JSON.
              * @function toJSON
-             * @memberof sst.ArrayDiff
+             * @memberof sst.ArrayMod
              * @instance
              * @returns {Object.<string,*>} JSON object
              */
-            ArrayDiff.prototype.toJSON = function toJSON() {
+            ArrayMod.prototype.toJSON = function toJSON() {
                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
             };
     
-            return ArrayDiff;
+            return ArrayMod;
         })();
     
         sst.AssignmentMod = (function() {

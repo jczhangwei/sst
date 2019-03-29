@@ -7,10 +7,12 @@ message ErrorStatus {
     string message = 1;
 }
 
-message ArrayDiff {
+message ArrayMod {
     int32 origin_start = 1;
     int32 origin_end = 2;
     int32 result_start = 3;
+    int32 result_end = 4;
+    repeated google.protobuf.Any data = 5;
 }
 
 message AssignmentMod {
@@ -21,4 +23,3 @@ message AssignmentMod {
 message DeleteMod {
     string path = 1;
 }
-

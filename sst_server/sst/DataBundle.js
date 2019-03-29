@@ -53,7 +53,7 @@ class DataBundle {
         this.addProxyForObject(data_obj, root_proxy_name);
     }
 
-    // todo 处理 Map 和 Array
+    // todo 和 Array
     addProxyForObject(data_obj, data_path, parent) {
         for(let key in data_obj) {
             if(data_obj.hasOwnProperty(key)) {
@@ -75,6 +75,23 @@ class DataBundle {
         let handler = this.getObjectHandler(data_obj, data_path);
         let proxy = new Proxy(data_obj, handler);
         this.proxies.set(data_path, proxy);
+
+        // add proxy for array
+        if(data_obj instanceof Array) {
+            {
+                let key = "push";
+                let prop = data_obj[key];
+                let path = `${data_path}/${key}`;
+                let proxy = new Proxy(prop, {
+                    apply: function(target, ctx, args) {
+
+                    }
+                });
+
+                this.proxies.set(path, proxy);
+            }
+        }
+
     }
 
     getObjectHandler(data_obj, data_path) {
@@ -96,8 +113,33 @@ class DataBundle {
                     return self.proxies.get(data_path + "/" + propKey);
                 }
                 return res;
+            },
+
+            apply: function(target, ctx, args) {
+
+            },
+
+            deleteProperty: function(target, propKey) {
+
             }
+
         }
+    }
+
+    getArrayHandler(data_obj, data_path) {
+        let self = this;
+        var handler = {
+            apply: function(target, ctx, args) {
+
+            },
+
+            deleteProperty: function(target, propKey) {
+
+            }
+
+        };
+
+        var obj_handler = this.getObjectHandler(data_obj, data_path);
     }
 
     /**
