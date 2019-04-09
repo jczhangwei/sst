@@ -78,13 +78,41 @@ class DataBundle {
 
         // add proxy for array
         if(data_obj instanceof Array) {
+            // func push
             {
                 let key = "push";
-                let prop = data_obj[key];
+                let func = data_obj[key];
                 let path = `${data_path}/${key}`;
-                let proxy = new Proxy(prop, {
+                let proxy = new Proxy(func, {
                     apply: function(target, ctx, args) {
+                        let mod = new sst.ArrayMod();
+                        mod.origin_start = ctx.length;
+                        mod.origin_end = ctx.length;
+                        mod.result_start = ctx.length;
+                        mod.result_end = ctx.length + args.length;
+                        mod.data = args;
 
+                        return Reflect.apply(target, ctx, args)
+                    }
+                });
+
+                this.proxies.set(path, proxy);
+            }
+
+            // func pop
+            {
+                let key = "pop";
+                let func = data_obj[key];
+                let path = `${data_path}/${key}`;
+                let proxy = new Proxy(func, {
+                    apply: function(target, ctx, args) {
+                        let mod = new sst.ArrayMod();
+                        mod.origin_start = ctx.length - 1;
+                        mod.origin_end = ctx.length;
+                        mod.result_start = ctx.length - 1;
+                        mod.result_end = ctx.length - 1;
+
+                        return Reflect.apply(target, ctx, args)
                     }
                 });
 
@@ -115,12 +143,10 @@ class DataBundle {
                 return res;
             },
 
-            apply: function(target, ctx, args) {
-
-            },
-
             deleteProperty: function(target, propKey) {
+                if(target instanceof Array) {
 
+                }
             }
 
         }
@@ -128,7 +154,7 @@ class DataBundle {
 
     getArrayHandler(data_obj, data_path) {
         let self = this;
-        var handler = {
+        let handler = {
             apply: function(target, ctx, args) {
 
             },
@@ -143,7 +169,7 @@ class DataBundle {
     }
 
     /**
-     * Add modification recoard
+     * Add modification record
      * @param path
      * @param value
      */
