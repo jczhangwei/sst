@@ -1,4 +1,5 @@
 let sst = require("../ProtoClasses").sst;
+let util = require("../util/Util");
 
 let root_proxy_name = ".";
 
@@ -65,7 +66,6 @@ class DataBundle {
                 if(typeof pro === "object") {
                     let path = `${data_path}/${key}`;
                     let p = this.addProxyForObject(pro, path);
-                    this.proxies.set(path, p);
                 }
 
             }
@@ -128,11 +128,31 @@ class DataBundle {
             set: function(target, propKey, value, receiver) {
                 let res = Reflect.get(target, propKey);
                 let prop_path = data_path + "/" + propKey;
-                if(typeof res === "object") {
-                    self.proxies.del(prop_path);
+                if(target instanceof  Array) {
+                    util.log("set_handler_of_array");
+                    let ins = parseInt(propKey);
+                    if(isNaN(ins)) {
+                        // todo 同object
+                    }
+                    let mod = new sst.ArrayMod();
+                    let prop_path = data_path;
+                    mod.origin_start = ins;
+                    mod.origin_end = ins + 1;
+                    mod.result_start = ins;
+                    mod.result_end = ins + 1;
+                    mod.data = value;
+                    mod.path = prop_path;
+                    self._modification.add(mod);
+
+                    return true;
+                } else {
+                    if(typeof res === "object") {
+                        self.proxies.del(prop_path);
+                    }
+                    self.addBaseAssignment(prop_path, value);
+                    return Reflect.set(target, propKey, value);
                 }
-                self.addBaseAssignment(prop_path, value);
-                return Reflect.set(target, propKey, value);
+
             },
 
             get: function(target, propKey, receiver) {
@@ -145,27 +165,11 @@ class DataBundle {
 
             deleteProperty: function(target, propKey) {
                 if(target instanceof Array) {
-
+                    util.log("deleteProperty_for_array", target, propKey);
                 }
             }
 
         }
-    }
-
-    getArrayHandler(data_obj, data_path) {
-        let self = this;
-        let handler = {
-            apply: function(target, ctx, args) {
-
-            },
-
-            deleteProperty: function(target, propKey) {
-
-            }
-
-        };
-
-        var obj_handler = this.getObjectHandler(data_obj, data_path);
     }
 
     /**

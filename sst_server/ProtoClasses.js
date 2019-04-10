@@ -1137,6 +1137,7 @@
              * @property {number|null} [result_start] ArrayMod result_start
              * @property {number|null} [result_end] ArrayMod result_end
              * @property {Array.<google.protobuf.IAny>|null} [data] ArrayMod data
+             * @property {string|null} [path] ArrayMod path
              */
     
             /**
@@ -1196,6 +1197,14 @@
             ArrayMod.prototype.data = $util.emptyArray;
     
             /**
+             * ArrayMod path.
+             * @member {string} path
+             * @memberof sst.ArrayMod
+             * @instance
+             */
+            ArrayMod.prototype.path = "";
+    
+            /**
              * Creates a new ArrayMod instance using the specified properties.
              * @function create
              * @memberof sst.ArrayMod
@@ -1230,6 +1239,8 @@
                 if (message.data != null && message.data.length)
                     for (var i = 0; i < message.data.length; ++i)
                         $root.google.protobuf.Any.encode(message.data[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                if (message.path != null && message.hasOwnProperty("path"))
+                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.path);
                 return writer;
             };
     
@@ -1280,6 +1291,9 @@
                         if (!(message.data && message.data.length))
                             message.data = [];
                         message.data.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                        break;
+                    case 6:
+                        message.path = reader.string();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -1337,6 +1351,9 @@
                             return "data." + error;
                     }
                 }
+                if (message.path != null && message.hasOwnProperty("path"))
+                    if (!$util.isString(message.path))
+                        return "path: string expected";
                 return null;
             };
     
@@ -1370,6 +1387,8 @@
                         message.data[i] = $root.google.protobuf.Any.fromObject(object.data[i]);
                     }
                 }
+                if (object.path != null)
+                    message.path = String(object.path);
                 return message;
             };
     
@@ -1393,6 +1412,7 @@
                     object.origin_end = 0;
                     object.result_start = 0;
                     object.result_end = 0;
+                    object.path = "";
                 }
                 if (message.origin_start != null && message.hasOwnProperty("origin_start"))
                     object.origin_start = message.origin_start;
@@ -1407,6 +1427,8 @@
                     for (var j = 0; j < message.data.length; ++j)
                         object.data[j] = $root.google.protobuf.Any.toObject(message.data[j], options);
                 }
+                if (message.path != null && message.hasOwnProperty("path"))
+                    object.path = message.path;
                 return object;
             };
     

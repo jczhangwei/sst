@@ -36,6 +36,11 @@ class SubscribeTest {
         assert.deepStrictEqual(server_data, client_data);
 
         server_proxy.pass_word = "1234123";
+        let res = new sst.Resource();
+        res.id = 11234;
+        res.num = 10;
+        res.type = 24;
+        server_proxy.resources[0] = res;
 
         let mod = server_bundle.getModification();
         util.log(mod);

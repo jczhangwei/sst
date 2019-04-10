@@ -13,6 +13,7 @@ message ArrayMod {
     int32 result_start = 3;
     int32 result_end = 4;
     repeated google.protobuf.Any data = 5;
+    string path = 6;
 }
 
 message AssignmentMod {
