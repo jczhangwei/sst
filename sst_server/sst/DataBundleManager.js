@@ -19,6 +19,7 @@ class DataBundleManager {
         bundle.data = data;
 
         this.bundles.set(bundle_name, bundle);
+        return bundle;
     }
 
     getBundleByName(name) {

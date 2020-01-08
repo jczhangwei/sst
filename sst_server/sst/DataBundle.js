@@ -1,3 +1,4 @@
+const assert = require('assert');
 let sst = require("../ProtoClasses").sst;
 let util = require("../util/Util");
 
@@ -47,23 +48,22 @@ class DataBundle {
     initDataProxy() {
         let data_obj = this.data;
 
-        if(!data_obj) {
+        if (!data_obj) {
             return;
         }
-
         this.addProxyForObject(data_obj, root_proxy_name);
     }
 
     // todo 和 Array
     addProxyForObject(data_obj, data_path, parent) {
-        for(let key in data_obj) {
-            if(data_obj.hasOwnProperty(key)) {
+        for (let key in data_obj) {
+            if (data_obj.hasOwnProperty(key)) {
                 let pro = data_obj[key];
-                if(pro === null) {
+                if (pro === null) {
                     continue;
                 }
 
-                if(typeof pro === "object") {
+                if (typeof pro === "object") {
                     let path = `${data_path}/${key}`;
                     let p = this.addProxyForObject(pro, path);
                 }
@@ -77,14 +77,14 @@ class DataBundle {
         this.proxies.set(data_path, proxy);
 
         // add proxy for array
-        if(data_obj instanceof Array) {
+        if (data_obj instanceof Array) {
             // func push
             {
                 let key = "push";
                 let func = data_obj[key];
                 let path = `${data_path}/${key}`;
                 let proxy = new Proxy(func, {
-                    apply: function(target, ctx, args) {
+                    apply: function (target, ctx, args) {
                         let mod = new sst.ArrayMod();
                         mod.origin_start = ctx.length;
                         mod.origin_end = ctx.length;
@@ -105,7 +105,7 @@ class DataBundle {
                 let func = data_obj[key];
                 let path = `${data_path}/${key}`;
                 let proxy = new Proxy(func, {
-                    apply: function(target, ctx, args) {
+                    apply: function (target, ctx, args) {
                         let mod = new sst.ArrayMod();
                         mod.origin_start = ctx.length - 1;
                         mod.origin_end = ctx.length;
@@ -122,14 +122,53 @@ class DataBundle {
 
     }
 
-    getObjectHandler(data_obj, data_path) {
+    getArrayHandler(data_obj, data_path) {
         let self = this;
         return {
-            set: function(target, propKey, value, receiver) {
+            set: function (target, propKey, value, receiver) {
                 let res = Reflect.get(target, propKey);
                 let prop_path = data_path + "/" + propKey;
                 let ins = parseInt(propKey);
-                if(target instanceof Array && !isNaN(ins)) {
+                util.log("set_handler_of_array");
+                let mod = new sst.ArrayMod();
+                let prop_path = data_path;
+                mod.origin_start = ins;
+                mod.origin_end = ins + 1;
+                mod.result_start = ins;
+                mod.result_end = ins + 1;
+                mod.data = value;
+                mod.path = prop_path;
+                self._modification.add(mod);
+
+                target[ins] = value;
+                return true;
+            },
+
+            get: function (target, propKey, receiver) {
+                let res = Reflect.get(target, propKey);
+                if (typeof res === "object") {
+                    return self.proxies.get(data_path + "/" + propKey);
+                }
+                return res;
+            },
+
+            deleteProperty: function (target, propKey) {
+                if (target instanceof Array) {
+                    util.log("deleteProperty_for_array", target, propKey);
+                }
+            }
+
+        }
+    }
+
+    getObjectHandler(data_obj, data_path) {
+        let self = this;
+        return {
+            set: function (target, propKey, value, receiver) {
+                let res = Reflect.get(target, propKey);
+                let prop_path = data_path + "/" + propKey;
+                let ins = parseInt(propKey);
+                if (target instanceof Array && !isNaN(ins)) {
                     util.log("set_handler_of_array");
                     let mod = new sst.ArrayMod();
                     let prop_path = data_path;
@@ -137,14 +176,14 @@ class DataBundle {
                     mod.origin_end = ins + 1;
                     mod.result_start = ins;
                     mod.result_end = ins + 1;
-                    mod.data = value;
+                    mod.data = [value];
                     mod.path = prop_path;
                     self._modification.add(mod);
 
                     target[ins] = value;
                     return true;
                 } else {
-                    if(typeof res === "object") {
+                    if (typeof res === "object") {
                         self.proxies.del(prop_path);
                     }
                     self.addBaseAssignment(prop_path, value);
@@ -153,16 +192,16 @@ class DataBundle {
 
             },
 
-            get: function(target, propKey, receiver) {
+            get: function (target, propKey, receiver) {
                 let res = Reflect.get(target, propKey);
-                if(typeof res === "object") {
+                if (typeof res === "object") {
                     return self.proxies.get(data_path + "/" + propKey);
                 }
                 return res;
             },
 
-            deleteProperty: function(target, propKey) {
-                if(target instanceof Array) {
+            deleteProperty: function (target, propKey) {
+                if (target instanceof Array) {
                     util.log("deleteProperty_for_array", target, propKey);
                 }
             }
@@ -194,9 +233,9 @@ class DataBundle {
         path = path.split("/");
         path.pop();
         let parent;
-        for(let key in path) {
+        for (let key in path) {
             let p = path[key];
-            if(p === ".") {
+            if (p === ".") {
                 parent = this._data;
             } else {
                 parent = parent[p];
@@ -209,9 +248,9 @@ class DataBundle {
     getObjectByPath(path) {
         path = path.split("/");
         let obj;
-        for(let key in path) {
+        for (let key in path) {
             let p = path[key];
-            if(p === ".") {
+            if (p === ".") {
                 obj = this._data;
             } else {
                 obj = obj[p];
@@ -228,12 +267,13 @@ class DataBundle {
 
     // 将一组改动应用到数据集
     applyModification(modification) {
-        modification.forEach(function(mod) {
-            if(mod instanceof sst.AssignmentMod) {
+        modification.forEach(function (mod) {
+            util.log("applay modification ", mod);
+            if (mod instanceof sst.AssignmentMod) {
                 this.assignDataByPath(mod.path, mod.data);
-            } else if(mod instanceof sst.DeleteMod) {
+            } else if (mod instanceof sst.DeleteMod) {
                 this.deleteDataByPath();
-            } else if(mod instanceof sst.ArrayMod) {
+            } else if (mod instanceof sst.ArrayMod) {
                 this.applyArrayMod(mod);
             }
         }, this);
@@ -241,8 +281,9 @@ class DataBundle {
 
     applyArrayMod(mod) {
         let prop_name = this.getNameByPath(mod.path);
-        let arr = this.getObjectByPath(mod.path)
-        
+        let arr = this.getObjectByPath(mod.path);
+        arr.splice.apply(arr, [mod.origin_end, mod.origin_end - mod.origin_start].concat(mod.data))
+
     }
 
     assignDataByPath(path, data) {
