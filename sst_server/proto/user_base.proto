@@ -1,0 +1,13 @@
+syntax = "proto3";
+package sst;
+
+import "resource.proto";
+
+/**
+*   base info of an user
+**/
+message UserBaseInfo {
+    string user_name = 1;
+    string pass_word = 2;
+    repeated Resource resources = 3;
+}
