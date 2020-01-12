@@ -1,8 +1,7 @@
 syntax = "proto3";
-package sst;
+package sst_server;
 
 import "user_base.proto";
-import "sst.proto";
 
 message Login {
     string user_name = 1;

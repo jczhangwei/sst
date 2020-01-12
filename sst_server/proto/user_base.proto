@@ -1,5 +1,5 @@
 syntax = "proto3";
-package sst;
+package sst_server;
 
 import "resource.proto";
 
