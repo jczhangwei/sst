@@ -4,14 +4,14 @@
   "private": true,
   "scripts": {
     "start": "node ./app.js",
-    "test" : "node %NODE_DEBUG_OPTION% ./test.js",
+    "test": "node %NODE_DEBUG_OPTION% ./test.js",
     "build_proto": "pbjs -t static-module -p proto -o ProtoClasses.js --keep-case main.proto"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
-    "gsst": "~0.0.0",
+    "gsst": "../gsst",
     "hashmap": "^2.3.0",
     "http-errors": "~1.6.2",
     "morgan": "~1.9.0",

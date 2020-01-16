@@ -7,6 +7,9 @@
     "test" : "node %NODE_DEBUG_OPTION% ./test.js",
     "build_proto": "pbjs -t static-module -p proto -o src/ProtoClasses.js --keep-case sst.proto"
   },
+  "bin": {
+    "gsst":"./bin/cli.js"
+  },
   "dependencies": {
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
