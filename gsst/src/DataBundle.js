@@ -1,5 +1,5 @@
 const assert = require('assert');
-let sst = require("../ProtoClasses").sst;
+let sst = require("./ProtoClasses").sst;
 let util = require("../util/Util");
 
 let root_proxy_name = ".";

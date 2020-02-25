@@ -7,11 +7,11 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Test",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\sst_server\\test.js"
+            "program": "${workspaceFolder}\\gsst\\test.js"
         }
     ]
 }

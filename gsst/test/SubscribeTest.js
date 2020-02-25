@@ -1,7 +1,7 @@
 const assert = require('assert');
 
 let BundleManager = require("../src/DataBundleManager");
-let sst = require("../ProtoClasses").sst;
+let sst = require("../src/ProtoClasses").sst;
 let util = require("../util/Util");
 
 
