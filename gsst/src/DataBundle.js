@@ -56,6 +56,17 @@ class DataBundle {
 
     // todo 和 Array
     addProxyForObject(data_obj, data_path, parent) {
+
+        let handler = this.getObjectHandler(data_obj, data_path);
+        let proxy = new Proxy(data_obj, handler);
+        this.proxies.set(data_path, proxy);
+
+        // add proxy for array
+        if (data_obj instanceof Array) {
+            this.addProxyForArray(data_obj, data_path);
+        }
+
+        // add proxy for children
         for (let key in data_obj) {
             if (data_obj.hasOwnProperty(key)) {
                 let pro = data_obj[key];
@@ -72,54 +83,44 @@ class DataBundle {
 
         }
 
-        let handler = this.getObjectHandler(data_obj, data_path);
-        let proxy = new Proxy(data_obj, handler);
-        this.proxies.set(data_path, proxy);
+    }
 
-        // add proxy for array
-        if (data_obj instanceof Array) {
-            // func push
-            {
-                let key = "push";
-                let func = data_obj[key];
-                let path = `${data_path}/${key}`;
-                let proxy = new Proxy(func, {
-                    apply: function (target, ctx, args) {
-                        let mod = new sst.ArrayMod();
-                        mod.origin_start = ctx.length;
-                        mod.origin_end = ctx.length;
-                        mod.result_start = ctx.length;
-                        mod.result_end = ctx.length + args.length;
-                        mod.data = args;
-
-                        return Reflect.apply(target, ctx, args)
-                    }
-                });
-
-                this.proxies.set(path, proxy);
-            }
-
-            // func pop
-            {
-                let key = "pop";
-                let func = data_obj[key];
-                let path = `${data_path}/${key}`;
-                let proxy = new Proxy(func, {
-                    apply: function (target, ctx, args) {
-                        let mod = new sst.ArrayMod();
-                        mod.origin_start = ctx.length - 1;
-                        mod.origin_end = ctx.length;
-                        mod.result_start = ctx.length - 1;
-                        mod.result_end = ctx.length - 1;
-
-                        return Reflect.apply(target, ctx, args)
-                    }
-                });
-
-                this.proxies.set(path, proxy);
-            }
+    addProxyForArray(data_obj, data_path) {
+        // func push
+        {
+            let key = "push";
+            let func = data_obj[key];
+            let path = `${data_path}/${key}`;
+            let proxy = new Proxy(func, {
+                apply: function (target, ctx, args) {
+                    let mod = new sst.ArrayMod();
+                    mod.origin_start = ctx.length;
+                    mod.origin_end = ctx.length;
+                    mod.result_start = ctx.length;
+                    mod.result_end = ctx.length + args.length;
+                    mod.data = args;
+                    return Reflect.apply(target, ctx, args);
+                }
+            });
+            this.proxies.set(path, proxy);
         }
-
+        // func pop
+        {
+            let key = "pop";
+            let func = data_obj[key];
+            let path = `${data_path}/${key}`;
+            let proxy = new Proxy(func, {
+                apply: function (target, ctx, args) {
+                    let mod = new sst.ArrayMod();
+                    mod.origin_start = ctx.length - 1;
+                    mod.origin_end = ctx.length;
+                    mod.result_start = ctx.length - 1;
+                    mod.result_end = ctx.length - 1;
+                    return Reflect.apply(target, ctx, args);
+                }
+            });
+            this.proxies.set(path, proxy);
+        }
     }
 
     getArrayHandler(data_obj, data_path) {
@@ -169,7 +170,7 @@ class DataBundle {
                 let prop_path = data_path + "/" + propKey;
                 let ins = parseInt(propKey);
                 if (target instanceof Array && !isNaN(ins)) {
-                    util.log("set_handler_of_array");
+                    util.log("set_handler_of_object");
                     let mod = new sst.ArrayMod();
                     let prop_path = data_path;
                     mod.origin_start = ins;
