@@ -1,5 +1,5 @@
 const assert = require('assert');
-const gsst = require('gsst');
+const gsst = require('../../gsst/src/ProtoManager');
 
 let BundleManager = require("../sst/DataBundleManager");
 let sst = require("../src/ProtoClasses").sst;
