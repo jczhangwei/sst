@@ -1,8 +1,8 @@
 const assert = require('assert');
-const gsst = require('../../gsst/src/ProtoManager');
+const gsst = require('gsst');
 
-let BundleManager = require("../sst/DataBundleManager");
-let sst = require("../src/ProtoClasses").sst;
+let DatabundleManager = gsst.DatabundleManager;
+let sst_server = require("../src/ProtoClasses").sst_server;
 let util = require("../util/Util");
 
 
@@ -21,20 +21,20 @@ class SubscribeTest {
     }
 
     run() {
-        let server_data = new sst.UserBaseInfo();
+        let server_data = new sst_server.UserBaseInfo();
         let server_bundle_name = "server_data";
-        let server_bundle = BundleManager.instance.addDataBundle(server_bundle_name, server_data);
+        let server_bundle = DatabundleManager.instance.addDataBundle(server_bundle_name, server_data);
         let server_proxy = server_bundle.proxy;
 
-        let client_data = new sst.UserBaseInfo();
+        let client_data = new sst_server.UserBaseInfo();
         let client_bundle_name = "client_data";
-        let client_bundle = BundleManager.instance.addDataBundle(client_bundle_name, client_data);
+        let client_bundle = DatabundleManager.instance.addDataBundle(client_bundle_name, client_data);
         let client_proxy = client_bundle.proxy;
 
         assert.deepStrictEqual(server_data, client_data);
 
         server_proxy.pass_word = "1234123";
-        let res = new sst.Resource();
+        let res = new sst_server.Resource();
         res.id = 11234;
         res.num = 10;
         res.type = 24;
