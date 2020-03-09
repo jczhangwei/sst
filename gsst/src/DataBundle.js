@@ -123,45 +123,7 @@ class DataBundle {
         }
     }
 
-    getArrayHandler(data_obj, data_path) {
-        let self = this;
-        return {
-            set: function (target, propKey, value, receiver) {
-                let res = Reflect.get(target, propKey);
-                let prop_path = data_path + "/" + propKey;
-                let ins = parseInt(propKey);
-                util.log("set_handler_of_array");
-                let mod = new sst.ArrayMod();
-                let prop_path = data_path;
-                mod.origin_start = ins;
-                mod.origin_end = ins + 1;
-                mod.result_start = ins;
-                mod.result_end = ins + 1;
-                mod.data = value;
-                mod.path = prop_path;
-                self._modification.add(mod);
-
-                target[ins] = value;
-                return true;
-            },
-
-            get: function (target, propKey, receiver) {
-                let res = Reflect.get(target, propKey);
-                if (typeof res === "object") {
-                    return self.proxies.get(data_path + "/" + propKey);
-                }
-                return res;
-            },
-
-            deleteProperty: function (target, propKey) {
-                if (target instanceof Array) {
-                    util.log("deleteProperty_for_array", target, propKey);
-                }
-            }
-
-        }
-    }
-
+    // 包括普通Object和Array
     getObjectHandler(data_obj, data_path) {
         let self = this;
         return {
@@ -284,7 +246,6 @@ class DataBundle {
         let prop_name = this.getNameByPath(mod.path);
         let arr = this.getObjectByPath(mod.path);
         arr.splice.apply(arr, [mod.origin_end, mod.origin_end - mod.origin_start].concat(mod.data))
-
     }
 
     assignDataByPath(path, data) {
