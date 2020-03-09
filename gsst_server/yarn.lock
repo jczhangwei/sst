@@ -419,10 +419,8 @@ function-bind@^1.1.1:
   resolved "http://registry.npm.taobao.org/graceful-readlink/download/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
   integrity sha1-TK+tdrxi8C+gObL5Tpo906ORpyU=
 
-gsst@~0.0.0:
+gsst@../gsst:
   version "0.0.0"
-  resolved "https://registry.yarnpkg.com/gsst/-/gsst-0.0.0.tgz#d93d1dd90a3385835cc47dc602165604ef894979"
-  integrity sha512-dlqU8/5GM8k1FjmxoYBsp5Xj76Nze86MXyCq260W8WqTUK30zpYaF0G3iScDoUQv90cn8bhWOcqlw1omhUjpKw==
   dependencies:
     cookie-parser "~1.4.3"
     debug "~2.6.9"
