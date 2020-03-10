@@ -1,0 +1,4 @@
+syntax = "proto3";
+package sst_server.msg;
+
+import "main.proto";

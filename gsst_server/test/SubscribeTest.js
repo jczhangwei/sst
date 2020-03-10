@@ -21,12 +21,12 @@ class SubscribeTest {
     }
 
     run() {
-        let server_data = new sst_server.UserBaseInfo();
+        let server_data = new sst_server.user_base.UserBaseInfo();
         let server_bundle_name = "server_data";
         let server_bundle = DatabundleManager.instance.addDataBundle(server_bundle_name, server_data);
         let server_proxy = server_bundle.proxy;
 
-        let client_data = new sst_server.UserBaseInfo();
+        let client_data = new sst_server.user_base.UserBaseInfo();
         let client_bundle_name = "client_data";
         let client_bundle = DatabundleManager.instance.addDataBundle(client_bundle_name, client_data);
         let client_proxy = client_bundle.proxy;
@@ -34,7 +34,7 @@ class SubscribeTest {
         assert.deepStrictEqual(server_data, client_data);
 
         server_proxy.pass_word = "1234123";
-        let res = new sst_server.Resource();
+        let res = new sst_server.resource.Resource();
         res.id = 11234;
         res.num = 10;
         res.type = 24;

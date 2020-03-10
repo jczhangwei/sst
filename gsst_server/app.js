@@ -3,8 +3,8 @@ let schedule = require('node-schedule');
 let protobuf = require("protobufjs");
 let HashMap = require('hashmap');
 
-let ProtoManager = require("./ProtoManager");
-let UserManager = require("./UserManager");
+let ProtoManager = require("./src/ProtoManager");
+let UserManager = require("./src/UserManager");
 
 let webSocketServer = new WebSocketServer({port: 8080});
 

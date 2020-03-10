@@ -1,5 +1,5 @@
 syntax = "proto3";
-package sst_server;
+package sst_server.main;
 
 import "user_base.proto";
 
@@ -10,3 +10,4 @@ message Login {
 message Test {
 
 }
+
