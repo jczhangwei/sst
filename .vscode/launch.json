@@ -7,6 +7,15 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Launch Server",
+            "program": "${workspaceFolder}\\gsst_server\\app.js",
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Test",
             "skipFiles": [
                 "<node_internals>/**"

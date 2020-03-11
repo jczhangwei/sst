@@ -3,10 +3,12 @@ let schedule = require('node-schedule');
 let protobuf = require("protobufjs");
 let HashMap = require('hashmap');
 
+let util = require("./util/Util");
 let ProtoManager = require("./src/ProtoManager");
-let UserManager = require("./src/UserManager");
+let ClientManager = require("./src/ClientManager");
+let RouteManager = require("./src/RouteManager");
 
-let webSocketServer = new WebSocketServer({port: 8080});
+let webSocketServer = new WebSocketServer({ port: 8080 });
 
 let connectNum = 0;
 
@@ -17,8 +19,7 @@ let MsgType = {
     business: "business"
 };
 
-let user_manager = UserManager.instance;
-var proto_namager = ProtoManager.instance;
+let client_manager = ClientManager.instance;
 let connects = [];
 
 function removeClient(key) {
@@ -29,9 +30,8 @@ function removeClient(key) {
     connects.splice(key, 1);
 }
 
-
 // connection
-webSocketServer.on('connection', function(client) {
+webSocketServer.on('connection', function (client) {
     ++connectNum;
     console.log('A client has connected. current connect num is : ' + connectNum);
 
@@ -40,33 +40,37 @@ webSocketServer.on('connection', function(client) {
         timestamp: Date.now()
     });
 
-    client.on('message', function(message) {
+    client.on('message', function (message) {
         try {
             message = JSON.parse(message);
-
-        } catch(e) {
-
+        } catch (e) {
+            util.printError(e);
         }
 
-        switch(message.type) {
+        switch (message.type) {
             case MsgType.login:
-                user_manager.userConnect(client);
+                client_manager.clientConnect(client);
+                break;
+            case MsgType.business:
+                if (message.route && message.data) {
+                    RouteManager.instance.dist(message.route, message.data);
+                }
                 break;
 
         }
     });
 
-    client.on('close', function(message) {
+    client.on('close', function (message) {
 
     });
 });
 
-schedule.scheduleJob("0-59 * * * * *", function() {
+schedule.scheduleJob("0-59 * * * * *", function () {
     let out_time = 2000;
-    for(let key in connects) {
+    for (let key in connects) {
         let connect = connects[key];
         console.log("scheduleJob.check_login", connect.timestamp, Date.now());
-        if(!user_manager.isLogin(connect.client) && Date.now() - connect.timestamp >= out_time) {
+        if (!client_manager.isLogin(connect.client) && Date.now() - connect.timestamp >= out_time) {
             removeClient(key);
         }
     }

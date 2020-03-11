@@ -1,9 +1,9 @@
 let User = require("./User");
 
-class UserManager {
+class ClientManager {
     static get instance() {
         if(!this._instance) {
-            this._instance = new UserManager();
+            this._instance = new ClientManager();
         }
         return this._instance;
     }
@@ -29,7 +29,7 @@ class UserManager {
         this._users = value;
     }
 
-    userConnect(client, suid) {
+    clientConnect(client, suid) {
         let user = new User(suid);
         this.clients.set(user, client);
         this.users.set(client, user);
@@ -45,4 +45,4 @@ class UserManager {
 
 }
 
-module.exports = UserManager;
+module.exports = ClientManager;

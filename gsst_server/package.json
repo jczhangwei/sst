@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./app.js",
     "test": "node %NODE_DEBUG_OPTION% ./test.js",
-    "build_proto": "pbjs -t static-module -p proto -o src/ProtoClasses.js --keep-case main.proto"
+    "build_proto": "pbjs -t static-module -p proto -o src/ProtoClasses.js --keep-case main.proto msg.proto"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",

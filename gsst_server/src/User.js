@@ -5,6 +5,10 @@ class User {
          */
         this.client = client;
     }
+
+    init() {
+
+    }
 }
 
 module.exports = User;
