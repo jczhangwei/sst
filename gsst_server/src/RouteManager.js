@@ -1,4 +1,6 @@
 const assert = require('assert');
+const us = require("underscore")
+
 let sst_server = require("../src/ProtoClasses").sst_server;
 
 let RouteTable = {
@@ -24,8 +26,13 @@ class RouteManager {
         this.route_table = new Map();
     }
 
-    dist(route, data) {
-        
+    dist(msg_name, data) {
+        let listeners = this.route_table.get(msg_name);
+        if(listeners) {
+            us.each(listeners, function(callback){
+                callback.call(caller, data);
+            }, this);
+        }
     }
 
     registerRoute(msg_name, callback, caller) {

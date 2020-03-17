@@ -6,5 +6,5 @@ import "main.proto";
 message Msg {
     main.SignUp user_sign_up = 1;
     main.SignIn user_sign_in = 2;
-    google.protobuf.Any user_log_out = 3;
+    google.protobuf.Any user_sign_out = 3;
 }

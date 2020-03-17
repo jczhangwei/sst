@@ -7,14 +7,17 @@ let util = require("./util/Util");
 let ProtoManager = require("./src/ProtoManager");
 let ClientManager = require("./src/ClientManager");
 let RouteManager = require("./src/RouteManager");
+let sst_server = require("./src/ProtoClasses").sst_server;
+
 
 let webSocketServer = new WebSocketServer({ port: 8080 });
 
 let connectNum = 0;
 
 let MsgType = {
-    login: "login",
-    logout: "logout",
+    sign_in: "sign_in",
+    sign_up: "sign_up",
+    sign_out: "sign_out",
     reconnect: "reconnect",
     business: "business"
 };
@@ -35,10 +38,7 @@ webSocketServer.on('connection', function (client) {
     ++connectNum;
     console.log('A client has connected. current connect num is : ' + connectNum);
 
-    connects.push({
-        client: client,
-        timestamp: Date.now()
-    });
+    client_manager.clientConnect(client);
 
     client.on('message', function (message) {
         try {
@@ -49,7 +49,11 @@ webSocketServer.on('connection', function (client) {
 
         switch (message.type) {
             case MsgType.login:
-                client_manager.clientConnect(client);
+                ClientManager.instance.userSignIn(client, message.data.suid, message.data.pass_word, function(){
+                    client.send({
+                        result: "success"
+                    })
+                });
                 break;
             case MsgType.business:
                 if (message.route && message.data) {

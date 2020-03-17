@@ -15,10 +15,6 @@ message SignIn {
     string pass_word = 2;
 }
 
-message LogOff {
-    
-}
-
 message Test {
-
+    
 }

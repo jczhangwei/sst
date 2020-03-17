@@ -6,3 +6,15 @@ body {
 a {
   color: #00B7FF;
 }
+
+#canvas {
+  color: #00B7FF;
+  background-color: black;
+  border: grey;
+  border: 1;
+}
+
+button {
+  margin: 10px;
+  height: 30px;
+}

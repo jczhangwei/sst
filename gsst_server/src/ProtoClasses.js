@@ -476,166 +476,6 @@
                 return SignIn;
             })();
     
-            main.LogOff = (function() {
-    
-                /**
-                 * Properties of a LogOff.
-                 * @memberof sst_server.main
-                 * @interface ILogOff
-                 */
-    
-                /**
-                 * Constructs a new LogOff.
-                 * @memberof sst_server.main
-                 * @classdesc Represents a LogOff.
-                 * @implements ILogOff
-                 * @constructor
-                 * @param {sst_server.main.ILogOff=} [properties] Properties to set
-                 */
-                function LogOff(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Creates a new LogOff instance using the specified properties.
-                 * @function create
-                 * @memberof sst_server.main.LogOff
-                 * @static
-                 * @param {sst_server.main.ILogOff=} [properties] Properties to set
-                 * @returns {sst_server.main.LogOff} LogOff instance
-                 */
-                LogOff.create = function create(properties) {
-                    return new LogOff(properties);
-                };
-    
-                /**
-                 * Encodes the specified LogOff message. Does not implicitly {@link sst_server.main.LogOff.verify|verify} messages.
-                 * @function encode
-                 * @memberof sst_server.main.LogOff
-                 * @static
-                 * @param {sst_server.main.ILogOff} message LogOff message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                LogOff.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified LogOff message, length delimited. Does not implicitly {@link sst_server.main.LogOff.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof sst_server.main.LogOff
-                 * @static
-                 * @param {sst_server.main.ILogOff} message LogOff message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                LogOff.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a LogOff message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof sst_server.main.LogOff
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {sst_server.main.LogOff} LogOff
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                LogOff.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.sst_server.main.LogOff();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a LogOff message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof sst_server.main.LogOff
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {sst_server.main.LogOff} LogOff
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                LogOff.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a LogOff message.
-                 * @function verify
-                 * @memberof sst_server.main.LogOff
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                LogOff.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a LogOff message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof sst_server.main.LogOff
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {sst_server.main.LogOff} LogOff
-                 */
-                LogOff.fromObject = function fromObject(object) {
-                    if (object instanceof $root.sst_server.main.LogOff)
-                        return object;
-                    return new $root.sst_server.main.LogOff();
-                };
-    
-                /**
-                 * Creates a plain object from a LogOff message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof sst_server.main.LogOff
-                 * @static
-                 * @param {sst_server.main.LogOff} message LogOff
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                LogOff.toObject = function toObject() {
-                    return {};
-                };
-    
-                /**
-                 * Converts this LogOff to JSON.
-                 * @function toJSON
-                 * @memberof sst_server.main.LogOff
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                LogOff.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return LogOff;
-            })();
-    
             main.Test = (function() {
     
                 /**
@@ -1384,7 +1224,7 @@
                  * @interface IMsg
                  * @property {sst_server.main.ISignUp|null} [user_sign_up] Msg user_sign_up
                  * @property {sst_server.main.ISignIn|null} [user_sign_in] Msg user_sign_in
-                 * @property {google.protobuf.IAny|null} [user_log_out] Msg user_log_out
+                 * @property {google.protobuf.IAny|null} [user_sign_out] Msg user_sign_out
                  */
     
                 /**
@@ -1419,12 +1259,12 @@
                 Msg.prototype.user_sign_in = null;
     
                 /**
-                 * Msg user_log_out.
-                 * @member {google.protobuf.IAny|null|undefined} user_log_out
+                 * Msg user_sign_out.
+                 * @member {google.protobuf.IAny|null|undefined} user_sign_out
                  * @memberof sst_server.msg.Msg
                  * @instance
                  */
-                Msg.prototype.user_log_out = null;
+                Msg.prototype.user_sign_out = null;
     
                 /**
                  * Creates a new Msg instance using the specified properties.
@@ -1454,8 +1294,8 @@
                         $root.sst_server.main.SignUp.encode(message.user_sign_up, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                     if (message.user_sign_in != null && message.hasOwnProperty("user_sign_in"))
                         $root.sst_server.main.SignIn.encode(message.user_sign_in, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                    if (message.user_log_out != null && message.hasOwnProperty("user_log_out"))
-                        $root.google.protobuf.Any.encode(message.user_log_out, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    if (message.user_sign_out != null && message.hasOwnProperty("user_sign_out"))
+                        $root.google.protobuf.Any.encode(message.user_sign_out, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -1497,7 +1337,7 @@
                             message.user_sign_in = $root.sst_server.main.SignIn.decode(reader, reader.uint32());
                             break;
                         case 3:
-                            message.user_log_out = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                            message.user_sign_out = $root.google.protobuf.Any.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -1544,10 +1384,10 @@
                         if (error)
                             return "user_sign_in." + error;
                     }
-                    if (message.user_log_out != null && message.hasOwnProperty("user_log_out")) {
-                        var error = $root.google.protobuf.Any.verify(message.user_log_out);
+                    if (message.user_sign_out != null && message.hasOwnProperty("user_sign_out")) {
+                        var error = $root.google.protobuf.Any.verify(message.user_sign_out);
                         if (error)
-                            return "user_log_out." + error;
+                            return "user_sign_out." + error;
                     }
                     return null;
                 };
@@ -1574,10 +1414,10 @@
                             throw TypeError(".sst_server.msg.Msg.user_sign_in: object expected");
                         message.user_sign_in = $root.sst_server.main.SignIn.fromObject(object.user_sign_in);
                     }
-                    if (object.user_log_out != null) {
-                        if (typeof object.user_log_out !== "object")
-                            throw TypeError(".sst_server.msg.Msg.user_log_out: object expected");
-                        message.user_log_out = $root.google.protobuf.Any.fromObject(object.user_log_out);
+                    if (object.user_sign_out != null) {
+                        if (typeof object.user_sign_out !== "object")
+                            throw TypeError(".sst_server.msg.Msg.user_sign_out: object expected");
+                        message.user_sign_out = $root.google.protobuf.Any.fromObject(object.user_sign_out);
                     }
                     return message;
                 };
@@ -1598,14 +1438,14 @@
                     if (options.defaults) {
                         object.user_sign_up = null;
                         object.user_sign_in = null;
-                        object.user_log_out = null;
+                        object.user_sign_out = null;
                     }
                     if (message.user_sign_up != null && message.hasOwnProperty("user_sign_up"))
                         object.user_sign_up = $root.sst_server.main.SignUp.toObject(message.user_sign_up, options);
                     if (message.user_sign_in != null && message.hasOwnProperty("user_sign_in"))
                         object.user_sign_in = $root.sst_server.main.SignIn.toObject(message.user_sign_in, options);
-                    if (message.user_log_out != null && message.hasOwnProperty("user_log_out"))
-                        object.user_log_out = $root.google.protobuf.Any.toObject(message.user_log_out, options);
+                    if (message.user_sign_out != null && message.hasOwnProperty("user_sign_out"))
+                        object.user_sign_out = $root.google.protobuf.Any.toObject(message.user_sign_out, options);
                     return object;
                 };
     

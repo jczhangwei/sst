@@ -1,8 +1,11 @@
+let schedule = require('node-schedule');
+
 let User = require("./User");
+let RouteManager = require("./RouteManager");
 
 class ClientManager {
     static get instance() {
-        if(!this._instance) {
+        if (!this._instance) {
             this._instance = new ClientManager();
         }
         return this._instance;
@@ -19,6 +22,21 @@ class ClientManager {
     constructor() {
         this._clients = new Map();
         this._users = new Map();
+
+        schedule.scheduleJob("0-59 * * * * *", function () {
+            let out_time = 2000;
+            for (let key in connects) {
+                let connect = connects[key];
+                if (!client_manager.isLogin(connect.client) && Date.now() - connect.timestamp >= out_time) {
+                    removeClient(key);
+                }
+            }
+        });
+
+        RouteManager.instance.registerRoute("user_sign_in", function () {
+
+        }, this);
+
     }
 
     get users() {
@@ -29,13 +47,27 @@ class ClientManager {
         this._users = value;
     }
 
-    clientConnect(client, suid) {
+    getSuid(user_name, pass_word) {
+        // todo
+        return user_name + pass_word;
+    }
+
+    userSignUp(client, user_name, pass_word, callback, caller) {
+        
+    }
+
+    userSignIn(client, suid, pass_word, callback, caller) {
+        // todo     pass world check
+
         let user = new User(suid);
         this.clients.set(user, client);
         this.users.set(client, user);
+        if(callback) {
+            callback.call(caller);
+        }
     }
 
-    userDisconnect(client) {
+    userSignOut(client, suid, callback, caller) {
 
     }
 

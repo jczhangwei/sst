@@ -7,6 +7,16 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Launch Client",
+            "program": "${workspaceFolder}\\gsst_client\\bin\\www",
+            "cwd": "${workspaceFolder}\\gsst_client",
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Launch Server",
             "program": "${workspaceFolder}\\gsst_server\\app.js",
             "skipFiles": [
