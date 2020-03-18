@@ -68,14 +68,3 @@ webSocketServer.on('connection', function (client) {
 
     });
 });
-
-schedule.scheduleJob("0-59 * * * * *", function () {
-    let out_time = 2000;
-    for (let key in connects) {
-        let connect = connects[key];
-        console.log("scheduleJob.check_login", connect.timestamp, Date.now());
-        if (!client_manager.isLogin(connect.client) && Date.now() - connect.timestamp >= out_time) {
-            removeClient(key);
-        }
-    }
-});

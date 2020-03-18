@@ -42,7 +42,7 @@ class RouteManager {
             this.route_table.set(msg_name, listeners);
         }
 
-        listeners.set(new RouteListener(callback, caller));
+        listeners.add(new RouteListener(callback, caller));
     }
     
 };
