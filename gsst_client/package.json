@@ -11,7 +11,7 @@
     "express": "~4.16.0",
     "gsst": "../gsst",
     "http-errors": "~1.6.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "morgan": "~1.9.0",
     "pbjs": "^0.0.5",
     "protobufjs": "^6.8.8",
